@@ -1,0 +1,111 @@
+
+$html-tabgroup-classes: true !default
+
+//------------------------------ VARIABLES ------------------------------//
+$animated: false !default
+
+$tab-background-color: $darkgreen
+$tab-select-color: $lightgreen
+$tab-container-background-color: #ACACAC
+
+//------------------------------ EXTENDABLES ------------------------------//
+%tabGroup-behaviour
+    input[type="radio"]
+        display: none
+    input[type="radio"] + label 
+        @include unselectable
+        display: inline-block
+    input[type="radio"] + label::before
+        display: none
+    & > div
+        display: none
+        height: 100%
+        overflow: auto
+        overflow-wrap: break-word
+
+%tabGroup-layout
+    input[type="radio"] + label    
+        margin: 0
+        padding: 0.5em
+        border-bottom: 0
+
+%tabAccordion-behaviour
+    .row-tab
+        input[type="radio"]
+            display: none
+        input[type="radio"] + label 
+            @include unselectable
+            display: block !important
+        input[type="radio"] + label::before
+            display: none
+        & > div
+            display: none
+            height: 100%
+            overflow: auto
+            overflow-wrap: break-word
+
+%tabAccordion-layout
+    .row-tab
+        margin-bottom: 0.5em
+        width: 100%
+        input[type="radio"] + label
+            margin: 0
+            border-bottom: 0
+            padding: 0.5em
+            width: 100%
+
+%tab-look
+    input[type="radio"] + label
+        @include linear-gradient(to top, $tab-background-color 0%, lighten($tab-background-color, 10%) 100%) //background-color: $tab-background-color
+    input[type="radio"]:focus + label
+        @include linear-gradient(to top, darken($tab-background-color,10%) 0%, $tab-background-color 100%) //background-color: darken($tab-background-color,10%)
+    input[type="radio"]:checked + label
+        @include linear-gradient(to top, $tab-select-color 0%, lighten($tab-select-color, 10%) 100%) //background-color: $tab-select-color
+
+%tab-div-look
+    & > div
+        border: 1px solid $darkgreen
+        border-radius: 2px
+
+%tab-animation
+    & > div
+        @extend .animated
+        @extend .fadeInDown
+
+//------------------------------ CLASSES ------------------------------//
+@if $html-tabgroup-classes
+
+    @if $animated    
+        .tabGroup
+            @extend %tabGroup-behaviour
+            //@extend %tabGroup-layout
+            @extend %tab-look
+            @extend %tab-div-look
+        .tabAccordion
+            @extend %tabAccordion-behaviour
+            @extend %tabAccordion-layout
+            @extend %tab-look
+    @else
+        .tabGroup
+            @extend %tabGroup-behaviour
+            //@extend %tabGroup-layout
+            @extend %tab-look
+            @extend %tab-div-look
+            @extend %tab-animation
+        .tabAccordion
+            @extend %tabAccordion-behaviour
+            @extend %tabAccordion-layout
+            @extend %tab-look
+            @extend %tab-animation
+     
+    .tab1:checked ~ .tab1,
+    .tab2:checked ~ .tab2,
+    .tab3:checked ~ .tab3,
+    .tab4:checked ~ .tab4,
+    .tab5:checked ~ .tab5,
+    .tab6:checked ~ .tab6,
+    .tab7:checked ~ .tab7,
+    .tab8:checked ~ .tab8,
+    .tab9:checked ~ .tab9,
+    .tab10:checked ~ .tab10
+        display: block

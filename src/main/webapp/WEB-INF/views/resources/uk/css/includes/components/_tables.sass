@@ -1,0 +1,180 @@
+$html-tables-classes: false !default
+
+//------------------------------ VARIABLES ------------------------------//
+$table-color: $darkgrey !default
+$table-color1: $green2 !default
+$table-color2: #ECFFBF !default
+$theader-bg-color: $lightgreen !default
+$gradient-points: 0% 100% !default
+$table-border: 1px solid $green2 !default
+
+$icon-font-family: 'icons' !default
+
+$icon-sortable: "\e030" !default
+$icon-editable: "\e007" !default
+$icon-removable: "\e00b" !default
+
+$icon-cart-empty: "\e025" !default
+$icon-cart-full: "\e026" !default
+$icon-delete: "\e00b" !default
+
+$table-font-family: $font-family
+$table-font-family-second: $font-family-second
+
+$sorting-bg-color: $lightgrey !default
+$sorting-bg-border: 1px solid  $darkgrey !default
+$sorting-layer: 5 !default
+
+$cart-bg-border: 1em solid  $darkgrey !default
+
+//------------------------------ EXTENDABLES ------------------------------//
+%table-gradient
+	@include linear-gradient(to top, $table-color1 nth($gradient-points,1), $table-color2 nth($gradient-points,2))
+%table-gradient-hover
+	@include linear-gradient(to top, darken($table-color1, 10%) nth($gradient-points,1), darken($table-color2,10%) nth($gradient-points,2))
+%table-gradient2
+	@include linear-gradient(to top, lighten($table-color, 10%) nth($gradient-points,1), $table-color nth($gradient-points,2))
+%table-gradient2-hover
+	@include linear-gradient(to top, $table-color nth($gradient-points,1), darken($table-color,10%) nth($gradient-points,2))
+
+%table-wrapper-base	
+	display: table
+	font-family: $table-font-family-second
+	table
+		width: 100%
+	theader
+		display: table
+		margin: 0 auto
+		padding: 0.25em 0.8em
+		border-top-left-radius: 0.8em
+		border-top-right-radius: 0.8em
+		font-size: 0.8em
+		font-weight: bold
+		background-color: $theader-bg-color
+	th, td 
+		position: relative
+		padding: 0.5em 0.05em
+		text-align: center
+		border-bottom: $table-border
+	tbody th
+		text-align: center
+		font-weight: bold
+		background-color: $table-color1
+	tbody th.sortable:hover 
+		background-color: darken($table-color1,10%)
+	tbody tr
+		background-color: $table-color2
+		width: 100%
+	tbody tr:hover 
+		background-color: darken($table-color2, 10%)
+	td
+		padding-left: 0.5em
+		padding-right: 1.25em
+		font-size: 0.8em
+		font-weight: bold
+	ul 
+		text-indent: 0
+
+// .sortable(th), .sorting-options(th>ul)
+%table-wrapper-sortable
+	.sortable::after
+		content: $icon-sortable
+		font-family: $icon-font-family
+		padding-left: 0.25em
+	.sortable:focus > .sorting-options,
+	.sortable:hover > .sorting-options		
+		display: block
+	.sorting-options
+		position: absolute
+		display: none
+		bottom: -70%
+		right: -30%
+		z-index: $sorting-layer
+		padding: 0.5em
+		font-size: 0.6em
+		font-weight: normal
+		font-style: italic
+		background-color: $sorting-bg-color
+		cursor: pointer
+		border: $sorting-bg-border
+		li::before
+			font-style: normal
+
+// .editable(span), .removable(span)
+%table-wrapper-editable
+	.editable
+		cursor: pointer	
+		padding: 0
+	.editable::after
+		content: $icon-editable		
+		padding: 0 0.2em
+		font-family: $icon-font-family
+		font-weight: normal
+	.removable
+		cursor: pointer	
+		padding: 0
+	.removable::after
+		content: $icon-removable		
+		padding: 0 0.2em
+		font-family: $icon-font-family
+		font-weight: normal
+		
+// .item-name(td), .item-price(td), .cart-empty/.cart-full(span), .delete(span)
+%table-cart-look
+	font-family: $table-font-family-second
+	border: $cart-bg-border
+	background-color: $table-color
+	td, tr
+		&:first-child
+			padding-left: 0.5em
+
+%table-wrapper-cart
+	.cart-empty::before
+		content: $icon-cart-empty
+		padding-right: 0.5em
+		font-family: $icon-font-family
+	.cart-empty
+		cursor: pointer
+	.cart-full::before
+		content: $icon-cart-full
+		padding-right: 0.5em
+		font-family: $icon-font-family
+	.cart-full
+		cursor: pointer
+	.delete::before
+		content: $icon-delete
+		position: relative
+		float: right
+		padding-right: 0.25em
+		font-family: $icon-font-family
+	.delete
+		cursor: pointer
+
+//------------------------------ CLASSES ------------------------------//
+.table-wrapper
+	@extend %table-wrapper-base
+	@extend %table-wrapper-sortable
+	.item-name
+		padding-right: 1.25em
+		font-size: 0.8em
+		font-weight: bold
+	.item-price
+		padding-right: 0.25em
+		font-size: 0.8em
+		font-weight: bold
+.table-wrapper-cart
+	width: 100%
+	@extend %table-wrapper-base
+	@extend %table-wrapper-sortable
+	@extend %table-wrapper-editable
+	@extend %table-wrapper-cart
+	.item-name
+		padding-right: 1.25em
+		font-size: 0.8em
+		font-weight: bold
+	.item-price
+		padding-right: 0.25em
+		font-size: 0.8em
+		font-weight: bold
+.cart-header
+	@extend %table-wrapper-cart

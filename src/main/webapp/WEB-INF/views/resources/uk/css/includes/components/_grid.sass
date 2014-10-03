@@ -1,0 +1,181 @@
+
+$html-grid-classes: true !default
+
+//--------------------------- VARIABLES ---------------------------//
+$direction: left !default
+$opposite: right !default
+$row-margin-bottom: 0.8rem !default
+$col-groups: 1 2 3 4 5 6 7 8 9 10 11 12 !default
+$off-groups: 1 2 3 4 5 6 7 8 9 10 11 !default
+
+//--------------------------- EXTENDABLES ---------------------------//
+@for $i from 1 through length($col-groups)
+	%col-#{nth($col-groups,$i)}	
+		float: $direction
+		display: block
+		margin-#{$opposite}: flex-gutter()
+		width: flex-grid(nth($col-groups,$i),$grid-columns) !important
+	%col-#{nth($col-groups,$i)}:last-child
+		margin-#{$opposite}: 0
+@for $i from 1 through length($off-groups)
+	%off-#{nth($off-groups,$i)}
+		margin-#{$direction}: flex-grid($i,$grid-columns) !important
+
+%flex-row
+	display: flex
+	flex-flow: row nowrap
+%flex-col
+	display: flex
+	flex-flow: column nowrap
+%flex-fit
+	flex: 0 0 auto
+%flex-expand
+	flex: 1 0 auto
+
+%last
+	float: $opposite
+%row
+	width: 100%
+	margin-bottom: $row-margin-bottom
+	display: inline-table
+%row:last-child
+	margin-#{$opposite}: 0
+%hidden
+	display: none
+%shown
+	display: block
+%bottom
+	position: absolute !important
+	bottom: 0 !important
+%centered
+	display: block
+	float: none !important
+	margin-right: auto !important
+	margin-left: auto !important
+%text-center
+	text-align: center
+%panel
+	background-color: $lightgrey
+	padding: $global-radius
+	box-sizing: border-box
+%shadow-box	
+	border: $border01
+	-webkit-box-shadow: 0px 0px 14px 3px black
+	-moz-box-shadow: 0px 0px 14px 3px black
+	box-shadow: 0px 0px 14px 3px black
+%shadow-grey-box	
+	border: $border01
+	-webkit-box-shadow: 0px 0px 14px 3px $darkgrey
+	-moz-box-shadow: 0px 0px 14px 3px $darkgrey
+	box-shadow: 0px 0px 14px 3px $darkgrey
+%sticky-bottom-left
+	position: fixed !important
+	bottom: 0 !important
+	left: 0 !important
+	border-top: 0
+%sticky-bottom-right
+	position: fixed !important
+	bottom: 0 !important
+	right: 0 !important
+	border-top: 0
+%sticky-top-left
+	position: fixed !important
+	top: 0 !important
+	left: 0 !important
+	border-top: 0
+%sticky-top-right
+	position: fixed !important
+	top: 0 !important
+	right: 0 !important
+	border-top: 0
+%left
+	float: left	
+%right
+	float: right	
+%layer-1
+	z-index: 10
+%layer-2
+	z-index: 20
+%layer-3
+	z-index: 30
+%layer-4
+	z-index: 40
+%layer-5
+	z-index: 50
+%layer-6
+	z-index: 60
+%layer-7
+	z-index: 70
+%layer-8
+	z-index: 80
+%layer-9
+	z-index: 90
+
+//--------------------------- CLASSES ---------------------------//
+@if $html-grid-classes
+	@for $i from 1 through length($col-groups)
+		.col-#{nth($col-groups,$i)}	
+			@extend %col-#{nth($col-groups,$i)}
+		.col-#{nth($col-groups,$i)}:last-child
+			@extend %col-#{nth($col-groups,$i)}:last-child
+	@for $i from 1 through length($off-groups)
+		.off-#{nth($off-groups,$i)}
+			@extend %off-#{nth($off-groups,$i)}
+
+	.flex-row
+		@extend %flex-row
+	.flex-col
+		@extend %flex-col
+	.flex-fit
+		@extend %flex-fit
+	.flex-expand
+		@extend %flex-expand
+
+	.last
+		@extend %last
+	.row
+		@extend %row
+	.row:last-child
+		@extend %row:last-child
+	.hidden
+		@extend %hidden
+	.shown
+		@extend %shown
+	.bottom
+		@extend %bottom
+	.centered
+		@extend %centered
+	.panel
+		@extend %panel
+	.shadow-box
+		@extend %shadow-box
+	.shadow-grey-box
+		@extend %shadow-grey-box
+	.sticky-bottom-left
+		@extend %sticky-bottom-left
+	.sticky-bottom-right
+		@extend %sticky-bottom-right
+	.sticky-top-left
+		@extend %sticky-top-left
+	.sticky-top-right
+		@extend %sticky-top-right
+	.left
+		@extend %left
+	.layer-1
+		@extend %layer-1
+	.layer-2
+		@extend %layer-2
+	.layer-3
+		@extend %layer-3
+	.layer-4
+		@extend %layer-4
+	.layer-5
+		@extend %layer-5
+	.layer-6
+		@extend %layer-6
+	.layer-7
+		@extend %layer-7
+	.layer-8
+		@extend %layer-8
+	.layer-9
+		@extend %layer-9

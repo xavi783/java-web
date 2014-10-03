@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      lang="en">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../../../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front body-editor">
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 95px;"></div>
+
+	<main class="main">
+		<div th:replace="html/includes/blog :: #user-areas-container" class="col-2 editor-area1"></div>
+
+		<div id="writeArticlesView" class="col-7 editor-area2">
+		    <form>
+	        <fieldset class="editor-fieldset">
+	        	<textarea name="ckeditor" id="ckeditor" class="row">Insert text here</textarea>
+	        	<div class="col-2 button-pill-glass box-1">Send</div>
+	        	<div class="box-2 left" style="max-width: 96px">
+					<input type="checkbox" id="saved" name="saved" onclick="return false">
+						<label>Saved</label>
+					</input>
+					<dirv class="row"></dirv>
+					<input type="checkbox" id="sent" name="sent" onclick="return false">
+						<label class="left">Sent</label>
+					</input>
+				</div>
+	        	<div class="col-2 button-pill-glass box-1 box-2">Publish</div>
+				<input type="checkbox" id="published" name="published" onclick="return false">
+					<label class="box-2 box-1 left">Published</label>
+				</input>
+				<div class="col-2 button-pill-glass box-1 box-2">Discard</div>
+	        </fieldset>
+		    </form>
+		</div>
+
+		<div id="writeArticlesOptions" class="col-7 editor-area3">
+			<form action="" style="height:100%">
+				<fieldset style="height:100%">
+					<div class="col-7">
+						<div class="field-container">
+							<input required="required" id="title" type="text" name="title"></input>
+							<label for="text">Title</label>
+						</div>
+						<div class="field-container">
+							<input required="required" id="subtitle" type="text" name="subtitle"></input>
+							<label for="text">Subtitle</label>
+						</div>
+						<div class="field-container">
+							<input required="required" id="author" type="text" name="author"></input>
+							<label for="text">Author</label>
+						</div>
+						<input id="date" type="date" name="date"></input>
+					</div>
+					<div class="col-5">
+						<div class="field-container">
+							<textarea class="fixed" rows="5" name="tags" style="width: 100%;"></textarea>
+							<label for="tags">Tags</label>
+						</div>					
+						<div class="field-container">
+							<input required="required" id="version" type="text" name="version"></input>
+							<label for="text">Version</label>
+						</div>
+						<div class="select-mask" style="height: 2.6em;">
+							<select name="categories" id="categories" style="height: 3em;">
+								<option value="option1">Option 1</option>
+								<option value="option2">Option 2</option>
+								<option value="option3">Option 3</option>
+								<option value="option4">Option 4</option>
+								<option value="option5">Option 5</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="editor-area4"><div id="tree"></div></div>
+	</main>
+
+	<div th:replace="html/includes/header :: footerFragment">
+	    <script src="../../../resources/jui/jui.min.js"></script>
+		<script src="../../../resources/pui/pui-1.0.js"></script>
+	    <script src="../../../resources/bb/underscore-min.js"></script>
+	    <script src="../../../resources/bb/backbone-min.js"></script>
+		<script src="../../../resources/uk/uk.js"></script>
+		<script src="../../../resources/uk/uk-blog.js"></script>
+	</div>
+	
+</body>
+</html>

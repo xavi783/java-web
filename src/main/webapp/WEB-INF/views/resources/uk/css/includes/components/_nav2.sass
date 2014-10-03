@@ -1,0 +1,78 @@
+$html-grid-classes: true !default
+
+//--------------------------- VARIABLES ---------------------------//
+$root-color: $lightgreen !default
+$child-color: $lightgrey !default
+
+
+//--------------------------- EXTENDABLES ---------------------------//
+%hbar-behaviour
+	width: 100%
+	ul
+		display: flex
+		flex-flow: row nowrap
+		justify-content: center
+		position: relative
+		width: 100%
+		ul
+			display: none
+			position: absolute
+			width: 100%
+		li
+			flex: 1 1 auto
+			float: left
+			position: relative
+			li
+				float: none
+				position: initial
+		li:hover > ul,
+		li:focus > ul
+			display: block
+
+%hbar-sizes
+	ul:first-child
+		top: 1em
+		left: 0
+		ul
+			top: 3em
+			left: 0
+			ul				
+				left: 1.5em
+	li
+		margin: 0
+		padding: 1em
+		border: 1px solid darken($lightgreen,10%)
+		border-right: 0
+		&:last-child
+			border-right: 1px solid darken($lightgreen,10%)
+		li
+			padding-top: 1em
+			padding-bottom: 1em
+			border: 1px solid darken($darkgrey,10%)
+			border-bottom: 0
+			&:last-child
+				border-right: 1px solid darken($darkgrey,10%)
+				border-bottom: 1px solid darken($darkgrey,10%)
+
+%hbar-style
+	ul:first-child
+		ul
+			background-color: $child-color
+	li
+		border: 1px solid darken($root-color,10%)
+		border-right: 0
+		&:last-child
+			border-right: 1px solid darken($root-color,10%)
+		li
+			border: 1px solid darken($darkgrey,10%)
+			border-bottom: 0
+			&:last-child
+				border-right: 1px solid darken($child-color,10%)
+				border-bottom: 1px solid darken($child-color,10%)
+
+//--------------------------- CLASSES ---------------------------//
+@if $html-grid-classes
+	.topbar
+		@extend %hbar-behaviour
+		@extend %hbar-sizes
+		@extend %hbar-style

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      lang="es">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <link href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script data-main="..\..\resources\uk\main" src="..\..\resources\uk\require.js"></script>
+</head>
+<body class="body-front" id="blog-front" th:inline="text">
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 140.5px;"></div>
+
+	<main class="main">
+		<aside class="row">
+			<aside class="off-1 col-4">
+				<div class="panel box1 shadow-box row">
+					<a href="../shop/home.html" th:href="@{${template.get('links.shop')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[0]')}">
+							Blog
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.home')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[1]')}">
+							Home
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.portfolio')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[2]')}">
+							Portfolio
+						</button>
+					</a>
+				</div>
+			</aside>
+			<div class="col-7 blog-banner"></div>
+		</aside>
+
+		<main class="off-1 col-8">
+			<div th:replace="html/includes/inserts :: idArticle (${prod})">...</div>
+
+			<section id="description" class="tabs col-12">
+				<div id="ItemDescription" class="tabGroup">
+					<input type="radio" name="myTabGroup" id="tab1" class="tab1" checked="checked"></input>
+					<label for="tab1" th:utext="${prod.getField('overview').get('title')}">Overview</label>
+					<input type="radio" name="myTabGroup" id="tab2" class="tab2"></input>
+					<label for="tab2" th:utext="${prod.getField('content').get('title')}">Table of Contents</label>
+					<input type="radio" name="myTabGroup" id="tab3" class="tab3"></input>
+					<label for="tab3" th:utext="${prod.getField('author').get('title')}">Author</label>
+					<div class="tab1 narrow">
+						<div class="flex-row">
+							<div class="flex-overview shown">
+								<ul class="icon-list" th:utext="${prod.getField('overview').get('content')[0]}"></ul>			
+							</div>						
+							<div class="flex-overview shown" th:utext="${prod.getField('overview').get('content')[1]}"></div>
+						</div>
+					</div>
+					<div class="tab2 narrow" th:utext="${prod.getField('content').get('content')}"></div>
+					<div class="tab3 narrow" th:utext="${prod.getField('author').get('content')}"></div>
+				</div>
+			</section>
+
+			<section id="target" class="tabs col-12">
+				<div id="ItemTarget" class="tabAccordion">
+					<div class="row-tab">
+						<input type="radio" name="myTabGroup2" id="tab4" class="tab4" checked="checked"></input>
+						<label for="tab4" th:utext="${prod.getField('learn').get('title')}">What you will learn from this book</label>
+						<div class="tab4" th:utext="${prod.getField('learn').get('content')}"></div>
+					</div>
+					<div class="row-tab">	
+						<input type="radio" name="myTabGroup2" id="tab5" class="tab5"></input>
+						<label for="tab5" th:utext="${prod.getField('detail').get('title')}">In Detail</label>
+						<div class="tab5" th:utext="${prod.getField('detail').get('content')}"></div>
+					</div>
+					<div class="row-tab">	
+						<input type="radio" name="myTabGroup2" id="tab6" class="tab6"></input>
+						<label for="tab6" th:utext="${prod.getField('approach').get('title')}">Approach</label>
+						<div class="tab6" th:utext="${prod.getField('approach').get('content')}"></div>
+					</div>
+					<div class="row-tab">
+						<input type="radio" name="myTabGroup2" id="tab7" class="tab7"></input>
+						<label for="tab7" th:utext="${prod.getField('isfor').get('title')}">Who this book is for</label>
+						<div class="tab7" th:utext="${prod.getField('isfor').get('content')}"></div>
+					</div>
+				</div>
+			</section>
+
+			<section id="comments" class="col-12">
+				<div class="col-12" sec:authorize="isAuthenticated()">
+					<form action="" class="col-12" id ="comment-form">
+						<div class="row">
+							<div class="col-4">
+								<input class="col-8 mark" id="mark-range" name="mark-range" type="range" min="1" max="5"></input>
+								<label class="col-3 full-star" for="mark-range" id="lbl-mark-range"></label>
+							</div>
+							<div class="col-8 authoring">
+					            <address class="author">By <a rel="author" href="" sec:authentication="name">Username</a></address> 
+					            <time pubdate="pubdate" datetime="1986-12-28">28/12/1986</time>
+					        </div>
+						</div>
+						<div class="row field-container">
+							<textarea id="comment" name="comment" class="comment" maxlength ="255"></textarea>
+							<label for="comment">Insert Comment Here</label>
+						</div>
+						<div class="row">
+							<button type="submit" class="last col-3 button-pill-glass">Send</button>
+						</div>
+					</form>
+				</div>
+
+				<div id="last_comments" class="col-12">
+					<div th:if="${!comments.getComments().isEmpty()}">
+						<div th:each="comment : ${comments.getComments()}">						
+							<div th:replace="html/includes/inserts :: post (${comment})">...</div>
+		      			</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<aside class="col-2" style="width: 20% !important">		
+
+			<aside id="cart-controller" class="cart-controller">
+				<div class="flex-row">
+					<span id="checkout-button" class="button-pill-glass checkout cart-empty-icon"> - CHECKOUT</span>
+					<span class="button-pill-glass remove x-icon"></span>		
+				</div>
+				<div id="cart" class="cart">
+					<div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+					<div class="viewport left">
+						<div class="overview">
+							<table id="cart-body" class="flex-col"></table>
+						</div>
+					</div>
+				</div>
+			</aside>
+
+			<nav id="shop-tree" class="row tree" style="width: 100% !important"></nav>
+				
+		</aside>
+	</main>
+
+	<footer class="footer">
+	    <div class="h6 link-list">
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[0]')}">FAQ</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[1]')}">Contact Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[2]')}">About Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[3]')}">Recommended Links</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[4]')}">Our Address</a>
+	    </div>
+	</footer>
+
+</body>
+</html>

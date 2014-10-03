@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!--  configuracion de database -->
+	<!-- <bean id="placeholder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+            <list>
+                <value>/WEB-INF/database/database.properties</value>
+                <value>/WEB-INF/social/twitter.properties</value>
+            </list>
+        </property> 
+	</bean>	-->
+	
+	<bean id="dataSource" name="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!--  configuracion de database's session -->
+	<bean id="sessionFactory" name="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan">
+			<array>
+				<value>com.uk.database</value>
+				<value>com.uk.login</value>
+				<value>com.uk.login.dao</value>
+				<value>com.uk.blog</value>
+				<value>com.uk.shop.mysql</value>
+			</array>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+         		<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+         		<prop key="hibernate.show_sql">true</prop>
+        	</props>
+		</property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>    
+   
+	<bean id="dao" name="dao" class="com.uk.database.mysql.MySqlDBUtils">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mongodao" name="mongodao"
+		class="com.uk.database.mongo.MongoDBUtils">
+		<property name="host" value="${mongodb.host}"></property>
+		<property name="port" value="${mongodb.port}"></property>
+		<property name="db" value="${mongodb.db}"></property>
+		<property name="user" value="${mongodb.user}"></property>
+		<property name="source" value="${mongodb.source}"></property>
+		<property name="password" value="${mongodb.pass}"></property>
+	</bean>
+	
+	 <!-- Configuracion de Conexiones a Providers de OAuth  (Twitter, Facebook, etc) -->
+    <!-- 
+   	<bean id="usersConnectionRepository" class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
+        <constructor-arg ref="dataSource" />
+        <constructor-arg ref="connectionFactoryLocator" />
+        <constructor-arg ref="textEncryptor" />
+	</bean>
+
+	<bean id="connectionRepository" factory-method="createConnectionRepository" 
+	      factory-bean="usersConnectionRepository" scope="request">
+	    <constructor-arg value="#{request.userPrincipal.name}" />
+	    <aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+	
+	<bean class="org.springframework.social.connect.web.ConnectController">
+	    <constructor-arg ref="connectionFactoryLocator" />
+	    <constructor-arg ref="connectionRepository" />
+	</bean>
+	 -->
+	
+</beans>

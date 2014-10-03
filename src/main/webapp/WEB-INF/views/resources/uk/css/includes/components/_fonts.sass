@@ -1,0 +1,151 @@
+$google-webfonts-url: 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Open+Sans+Condensed:300,700,300italic'
+$html-fonts-classes: true !default
+@import url(#{$google-webfonts-url})
+
+//------------------------------ VARIABLES ------------------------------//
+$size: 16px !default
+$font-color: #000 !default
+$font-family: 'Open Sans', sans-serif !default
+$font-family-second: 'Open Sans Condensed', sans-serif !default
+$font-weight: 300 !default
+$font-style: normal !default
+
+$header-sizes: 2.986rem 2.488rem 2.074rem 1.728rem 1.44rem 1.2rem !default
+$header-weights: 700 700 400 400 400 400 !default
+$link-colors: $icon-front-color #030 $icon-hover-color $icon-hover-color !default
+
+
+$quotes-color: $green1 darken($darkgrey,20%) !default
+$quotes-symbols: 'icons' "\e035" "\e034" "\ea01" "\ea00" !default
+$quotes-border: 0.15em solid nth($quotes-color,1) !default
+
+//------------------------------ EXTENDABLES ------------------------------//
+%text-box-model
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem
+%header-box-model
+	padding: 0.8rem 0.5rem 0.8rem 0.5rem
+
+//------------------------------ CLASSES ------------------------------//
+@if $html-fonts-classes
+	html
+		font-size: $size
+		@media #{mquery(0,$mobile)}
+			font-size: 0.8*$size
+	.bold
+		font-weight: bold !important
+	.narrow
+		font-family: $font-family-second
+		font-size: 1.2rem
+	body, .p
+		font-size: 1rem
+		font-color: $font-color
+		font-family: $font-family
+		font-weight: $font-weight
+		font-style: $font-style
+	h1, .h1
+		font-size: nth($header-sizes,1)
+		font-weight: nth($header-weights,1)
+	h2, .h2
+		font-size: nth($header-sizes,2)
+		font-weight: nth($header-weights,2)
+	h3, .h3
+		font-size: nth($header-sizes,3)
+		font-weight: nth($header-weights,3)
+	h4, .h4
+		font-size: nth($header-sizes,4)
+		font-weight: nth($header-weights,4)
+	h5, .h5
+		font-size: nth($header-sizes,5)
+		font-weight: nth($header-weights,5)
+	h6, .h6
+		font-size: nth($header-sizes,6)
+		font-weight: nth($header-weights,6)
+	p
+		text-align: justify
+	a:link
+		font-weight: normal
+		text-decoration: none
+		color: nth($link-colors,1)
+	a:visited
+		font-weight: normal
+		text-decoration: none
+		color: nth($link-colors,2)
+	a:focus,
+	a:hover
+		font-weight: bold
+		text-decoration: none
+		color: nth($link-colors,3)
+	a:active
+		font-weight: normal
+		text-decoration: none
+		color: nth($link-colors,4)
+	.link-list		
+		a
+			&:after
+				content: " |"
+			&:hover:after
+				font-weight: normal
+				content: " |"
+			&:visited:after
+				color: nth($link-colors,1)
+				content: " |"
+			&:last-child:after
+				content: ""	
+	.cloud-tag
+		@extend .h3
+		.tag
+			white-space: nowrap
+			font-size: attr(data-size)
+	.alert-text
+		color: red
+	.error-msg
+		color: red
+		font-weight: bold
+		font-size: 0.8em
+	.warning-msg
+		color: #FF9A11
+		font-weight: bold
+		font-size: 0.8em
+
+	blockquote::before
+		color: nth($quotes-color,1)
+		content: open-quote
+		font-family: 'icons'
+		font-style: italic
+		font-weight: 100
+	blockquote
+		quotes: nth($quotes-symbols,2) nth($quotes-symbols,3) nth($quotes-symbols,5) nth($quotes-symbols,4)
+		display: block
+		border-#{$direction}: $quotes-border
+		padding: 0 0.5em
+		font-family: $font-family-second
+		font-size: 1.15em
+		font-style: italic
+		font-weight: bold
+		text-align: justify
+		color: nth($quotes-color,2)
+		blockquote
+			display: inline
+			border-#{$direction}: none
+			font-size: 0.8em
+			font-family: $font-family
+			font-weight: 100
+			&::before
+				padding: 0 0.5em 0 0.25em
+			&::after
+				color: nth($quotes-color,1)
+				padding: 0 0.5em 0 0.25em
+				content: close-quote
+				font-family: 'icons'
+				font-style: italic
+				font-weight: 100
+	blockquote p
+		display: inline
+		padding: 0
+		margin: 0
+		border: 0
+
+	.text-right
+		text-align: right
+	.text-left
+		text-align: left

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      lang="es">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front" id="blog-front" th:inline="text">
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 109.5px;"></div>
+
+	<main class="main">
+		<div class="row">
+			<aside class="off-1 col-4">
+				<div class="panel box1 shadow-box row">
+					<a href="../shop/home.html" th:href="@{${template.get('links.shop')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[0]')}">
+							Shop
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.home')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[1]')}">
+							Home
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.portfolio')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[2]')}">
+							Portfolio
+						</button>
+					</a>
+				</div>
+			</aside>
+			<div class="col-7 blog-banner"></div>
+		</div>
+		<div class="row">
+			<section class="off-1 col-8" id="content">
+				<div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+				<div class="viewport left">
+					<div class="overview">
+						<article>
+							<header>
+						        <h1>Título del artículo 1</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>
+						<article>
+							<header>
+						        <h1>Título del artículo 2</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>
+						<article>
+							<header>
+						        <h1>Título del artículo 3</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>
+						<article>
+							<header>
+						        <h1>Título del artículo 4</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>		
+						<article>
+							<header>
+						        <h1>Título del artículo 5</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>	
+						<article>
+							<header>
+						        <h1>Título del artículo 6</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>	
+						<article>
+							<header>
+						        <h1>Título del artículo 7</h1>
+						        <div class="authoring">
+						            <address class="author">By <a rel="author" href="/author/john-doe">John Doe</a></address> 
+						            <time pubdate="pubdate" datetime="2011-08-28" title="August 28th, 2011">28/12/1986</time>
+						        </div>
+						    </header>
+						    <div class="content">
+						    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+						    </div>
+						</article>
+					</div>
+				</div>
+			</section>
+			<aside class="col-3" id="menus">
+				<div id="tree" class="tree"></div>
+				<section id="news">
+					<p class="row h5 bold">News</p>
+					<div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+					<div class="viewport left">
+						<div class="overview">
+							<article>
+							    <div class="content">
+							    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt.</p>
+							    </div>
+							</article>
+							<article>
+							    <div class="content">
+							    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt.</p>
+							    </div>
+							</article>
+							<article>
+							    <div class="content">
+							    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt.</p>
+							    </div>
+							</article>
+						</div>
+					</div>
+				</section>
+			</aside>
+		</div>
+	</main>
+	
+	<footer class="footer">
+	    <div class="link-list">
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[0]')}">FAQ</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[1]')}">Contact Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[2]')}">About Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[3]')}">Recommended Links</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[4]')}">Our Address</a>
+	    </div>
+	</footer>
+
+	<div th:replace="html/includes/header :: footerFragment">
+	    <script src="../../resources/jui/jui.min.js"></script>
+		<script src="../../resources/pui/pui-1.0.js"></script>
+	    <script src="../../resources/bb/underscore-min.js"></script>
+	    <script src="../../resources/bb/backbone-min.js"></script>
+		<script src="../../resources/uk/uk.js"></script>
+		<script src="../../resources/uk/uk-blog.js"></script>
+	</div>
+
+	<script> if($('#content').exist()){ $('#content').tinyscrollbar({ axis: 'y' }); }; </script>
+	<script> if($('#news').exist()){ $('#news').tinyscrollbar({ axis: 'y' }); }; </script>
+</body>
+</html>

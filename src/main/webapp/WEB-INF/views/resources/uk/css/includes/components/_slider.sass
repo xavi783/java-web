@@ -1,0 +1,75 @@
+
+$html-tabgroup-classes: true !default
+
+//------------------------------ VARIABLES ------------------------------//
+$slider-height: 322px
+
+$control-colors: #2a2a2a #fff
+$control-effect: opacity 0.2 0.4
+$control-transition: all 0.1s ease
+
+$prev-pos: left 10px top 40%
+$prev-size: 1em
+$next-pos: right 10px top 40% 
+$next-size: 1em
+$play-pos: right 1em top 1em 
+$play-size: 0.5em
+
+//------------------------------ EXTENDABLES ------------------------------//
+%slider-box
+	width: 100%
+	height: $slider-height
+	line-height: $slider-height
+
+//------------------------------ CLASSES ------------------------------//
+@if $html-tabgroup-classes
+	.slider
+		@extend %slider-box
+		position: relative
+		overflow: hidden
+	.slides-container
+		position: relative
+		display: block
+		margin: 0
+		padding: 0
+		list-style: none
+	.slide
+		position: relative
+		display: block
+		float: left
+		margin: 0
+		padding: 0
+	.ctrl_prev,
+	.ctrl_next,
+	.ctrl_play
+		position: absolute
+		display: block
+		z-index: 999
+		border-radius: 50%
+		background: nth($control-colors,1)
+		text-align: center
+		color: nth($control-colors,2)
+		font-family: 'icons'
+		line-height: initial
+		#{nth($control-effect,1)}: nth($control-effect,2)
+		cursor: pointer
+	.ctrl_prev
+		#{nth($prev-pos,1)}: nth($prev-pos,2)
+		#{nth($prev-pos,3)}: nth($prev-pos,4)
+		padding: $prev-size
+		font-size: $prev-size
+	.ctrl_next
+		#{nth($next-pos,1)}: nth($next-pos,2)
+		#{nth($next-pos,3)}: nth($next-pos,4)
+		padding: $next-size
+		font-size: $next-size
+	.ctrl_play
+		#{nth($play-pos,1)}: nth($play-pos,2)
+		#{nth($play-pos,3)}: nth($play-pos,4)
+		padding: $play-size
+		font-size: $play-size
+	.ctrl_prev:hover,
+	.ctrl_next:hover,
+	.ctrl_play:hover
+		#{nth($control-effect,1)}: nth($control-effect,3)
+		-webkit-transition: $control-transition

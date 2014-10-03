@@ -1,0 +1,191 @@
+	
+#article
+	padding-top: 1em
+
+#target,
+#description
+	background-color: $lightgrey
+	margin: 1em 0em 1em 0em
+	border-radius: 2px
+	.tabGroup
+		input[type="radio"]+label
+			margin: 0.5em 0 0em 0.5em
+			padding: 0.5em
+			border-radius: 2px
+			border-bottom: 0
+		& > div
+			margin: 0.8em
+			border-radius: 2px
+			padding: 0.8em
+			min-height: 14em
+			background-color: white
+	.flex-overview
+		@extend .flex-expand
+		flex-basis: 21em
+
+#target
+	background-color: $lightgrey
+	margin-bottom: 1em
+	border-radius: 2px
+	.row-tab
+		div
+			min-height: 14em
+			padding: 0.8em
+			background-color: white
+
+#comments
+	background-color: $lightgrey
+	margin-top: 1em
+	margin-bottom: 1em
+	border-radius: 2px
+	form
+		flex-flow: row nowrap
+		margin: 0.8em auto 0.8em auto
+		padding: 0.8em
+		border: 1px solid $darkgrey
+	input[type="range"]
+		padding: 0
+		padding-right: 0.5em
+		margin: 0
+		margin-right: 1em
+		-webkit-appearance: none
+		-moz-appearance: none
+		background-color: $darkgrey
+	input[type="range"]::-webkit-slider-thumb,
+	input[type="range"]::-moz-range-thumb
+		-webkit-appearance: none !important
+		-moz-appearance: none
+		background-color: $lightgreen
+		opacity: 0.5
+	input[type="range"] ~ label
+		cursor: initial
+	input[type="range"] ~ label::before
+		margin-right: 0.5em
+	textarea
+		width: 100%
+		height: 6em
+		resize: none
+		padding: 1.2em 1em 0 1em
+	.authoring
+		text-align: right
+	.post
+		border: 1px solid $darkgrey
+		border-bottom: 0
+		border-radius: 2px
+	.post:last-child
+		border-bottom: 1px solid $darkgrey
+
+.price-panel
+	height: 7.5em
+	background-color: $lightgrey
+	form
+		padding: 1rem 1.5rem
+		max-width: 12em
+	& > div
+		padding-top: 0.8rem
+		padding-left: 1.5rem
+		& > div
+			margin-bottom: 1rem
+	p
+		margin-bottom: 0.5rem
+	.title-placeholder
+		white-space: nowrap
+		overflow: hidden
+		padding-bottom: 0.8em
+
+.price-image
+	min-width: 11em
+	margin-left: 2em
+	
+.cart-controller
+	background-color: $lightgrey
+	margin: 1em 0 2em 0
+	padding: 0.5em
+	.flex-row
+		justify-content: space-between
+	span
+		margin: 0
+.cart
+	@include scrollbar($direction: y)
+	height: 8em
+	border: $border01
+	background-color: lighten($bg-color, 5%)
+	overflow: hidden
+	margin-top: 0.5em
+	.scrollbar
+		width: 3%
+	.viewport
+		width: 97%
+		height: 100%
+		background-color: lighten($bg-color, 5%)
+	.overview
+		width: 100%
+	table
+		margin-bottom: 1.5em	
+	tr
+		@extend %flex-row
+		padding: 0.1em 0 0.1em 0
+		th
+			@include linear-gradient(to top, $tab-background-color 0%, lighten($tab-background-color, 10%) 100%)
+			position: relative
+			padding: 0.25em 0 0.25em 0
+		td,th
+			flex: 1 0 auto
+			text-align: center
+		td:last-child,
+		th:last-child
+			@extend %flex-row
+			flex: 0 0 4em
+		span
+			flex: auto
+		&:first-child
+			padding: 0
+	.sortable
+		cursor: pointer
+	.sortable::after
+		content: $icon-sortable
+		font-family: $icon-font-family
+		padding-left: 0.2em
+	.sortable:focus,
+	.sortable:hover
+		@include linear-gradient(to top, darken($tab-background-color,10%) 0%, $tab-background-color 100%) 
+	.sortable:focus > .sorting-options,
+	.sortable:hover > .sorting-options		
+		display: block
+	.sorting-options
+		position: absolute
+		z-index: 99
+		display: none
+		top: 1.5em
+		right: 0
+		padding: 0.2em 0 0.2em 0
+		width: 4em
+		background-color: $lightgrey
+		border: 1px solid $darkgrey
+		span
+			margin-right: 0.5em
+		span:last-child
+			margin-right: initial
+
+.price-panel,
+.cart-controller,
+#description,
+#target,
+#comments,
+#search-content
+	@extend .shadow-box
+
+#search-content
+	@include scrollbar($direction: y)
+	height: 60em
+	margin-bottom: 1em
+	overflow: hidden
+	.scrollbar
+		width: 1%
+	.viewport
+		width: 99%
+		height: 100%
+		background-color: lighten($bg-color, 5%)
+	.overview
+		width: 100%
+		padding: 0.8em

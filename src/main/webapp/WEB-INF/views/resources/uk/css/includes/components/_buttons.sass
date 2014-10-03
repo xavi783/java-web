@@ -1,0 +1,229 @@
+@import "sassy-buttons"
+
+$html-buttons-classes: false !default
+
+//------------------------------- VARIABLES -------------------------------//
+// We use these to style buttons
+$btn-sizes: 0.44em 0.57em 0.75em 1em !default
+$btn-font-sizes: 0.7em 0.82em 1em 1.25em !default
+$btn-gutter: 0 !default
+$radio-pill-sizes: 1.5em 1.5em 1.5em 2em
+
+// hover and disabled effects
+$btn-onhover-dark: 10% !default
+$btn-disabled-opacity: 0.6 !default
+
+//drop-down variables
+$dd-color: $brown !default
+$dd-color-alt: #333 !default
+
+// We use these to style dropdown buttons
+$dd-padding: 2.2em 2.2em 2.4em 3em !default
+$dd-pipsize: 0.44em 0.57em 0.56em 0.63em !default
+$dd-opposite: 0.88em 0.8em 1em 1.5em !default
+$dd-top: -0.28em -0.28em -0.28em -0.38em !default
+
+//---------------------------- MIXINS/FUNCTION ----------------------------//
+@mixin button-base($style:true, $display:block, $align: left)
+	$btn-border-width: 1px
+	$btn-border-style: solid
+	$btn-font-weight: bold
+	$btn-font-align: center
+	$btn-font-family: $font-family
+	@if $style
+		border-style: $btn-border-style
+		border-width: $btn-border-width
+		cursor: $cr-pointer
+		font-family: $btn-font-family
+		font-weight: $btn-font-weight
+		line-height: normal
+		text-decoration: none
+		text-align: $btn-font-align
+	@if $align == left
+		float: left
+	@if $align == right
+		float: rigth
+	@if $align == centered
+		margin: 0 auto
+	@if $display
+		display: $display
+
+@mixin button-size($padding:nth($btn-sizes,3), $radius:false, $full-width:false, $is-input:false, $btn-margin:$btn-gutter)
+	@if $radius == rounded
+		@include radius(50%)
+		padding: 0
+		width: ($padding*2)
+		height: ($padding*2)
+		line-height: ($padding*2)
+		text-align: center
+		@if $padding == nth($btn-sizes,3)
+			font-size: nth($btn-font-sizes,3)
+		@else if $padding == nth($btn-sizes,1)
+			font-size: nth($btn-font-sizes,1)
+		@else if $padding == nth($btn-sizes,2)
+			font-size: nth($btn-font-sizes,2)
+		@else if $padding == nth($btn-sizes,4)
+			font-size: nth($btn-font-sizes,4)
+		@else                        
+			font-size: $size
+		$padding: false
+		$full-width: false
+	@else if $radius == true
+		@include radius($global-radius)
+	@else if $radius
+		@include radius($radius)
+
+	// padding & size:
+	@if $padding
+		padding-top: $padding
+		padding-#{$opposite}: $padding * 2
+		padding-bottom: $padding + em-calc(1)
+		padding-#{$direction}: $padding * 2
+		@if $padding == nth($btn-sizes,3)
+			font-size: nth($btn-font-sizes,3)
+		@else if $padding == nth($btn-sizes,1)
+			font-size: nth($btn-font-sizes,1)
+		@else if $padding == nth($btn-sizes,2)
+			font-size: nth($btn-font-sizes,2)
+		@else if $padding == nth($btn-sizes,4)
+			font-size: nth($btn-font-sizes,4)
+		@else
+			font-size: $padding - em-calc(2)
+
+	// We can set $full-width:true to remove side padding extend width.
+	@if $full-width
+		// We still need to check if $padding is set.
+		@if $padding
+			padding-top: $padding
+			padding-bottom: $padding + em-calc(1)
+		@else
+			padding-top: 0
+			padding-bottom: 0
+		padding-right: 0
+		padding-left: 0
+		width: 100%
+
+	// <input>'s and <button>'s take on strange padding. We added this to help fix that.
+	@if $is-input == nth($btn-sizes,4)
+		padding-top: $is-input + em-calc(.5)
+		padding-bottom: $is-input + em-calc(.5)
+		-webkit-appearance: none
+	@if $is-input
+		padding-top: $is-input + em-calc(1)
+		padding-bottom: $is-input
+		-webkit-appearance: none
+	//margin: $btn-margin
+
+@mixin button-style($bg:$ligthgreen, $btn-onhover:$darkgreen, $btn-font-color:$brown, $disabled:false, $gradient:false)
+	// We control which background styles are used,
+	// these can be removed by setting $bg:false	
+	@if $bg
+		background-color: $bg
+		border-color: darken($bg, $btn-onhover-dark)
+		&:hover,
+		&:focus
+			@if $btn-onhover
+				background-color: $btn-onhover
+				@if $gradient
+					background: $btn-onhover
+			@else
+				background-color: darken($bg, 10%)
+				@if $gradient
+					background: darken($bg, 10%)
+		color: $btn-font-color
+		&:hover,
+		&:focus
+			color: darken($btn-font-color, 10%)
+
+	// We can set $disabled:true to create a disabled transparent button.
+	@if $disabled
+		cursor: $cr-default
+		opacity: $btn-disabled-opacity
+		@if $experimental
+			-webkit-box-shadow: none
+		box-shadow: none
+		&:hover,
+		&:focus
+			background-color: $bg
+
+@mixin dropdown-base($padding:nth($dd-padding,2), $direction: right, $pip:nth($dd-pipsize,2) nth($dd-opposite,2) nth($dd-top,2), $pip-color:$dd-color, $base-style:true)
+
+	@if $base-style 
+		position: relative
+		// This creates the base styles for the triangle pip
+		&:before
+			position: absolute
+			content: ""
+			width: 0
+			height: 0
+			display: block
+			top: 50%
+	
+	@if $padding
+		padding-#{$direction}: $padding
+		&:before
+			border-width: nth($pip,1)
+			#{$direction}: nth($pip,2)
+			margin-top: nth($pip,3)
+	
+	@if $pip-color
+		&:before
+			border-style: solid
+			border-color: $pip-color transparent transparent transparent
+
+//------------------------------ EXTENDABLES ------------------------------//
+%button-plain
+	@include button-style($bg:$lightgreen, $btn-onhover:$lightgreen, $btn-font-color:black, $disabled:false)
+
+%button-gradient
+	@extend %button-plain
+	@include linear-gradient(to top, $lightgreen 0%, lighten($lightgreen, 10%) 100%)
+	&:focus,
+	&:hover
+		@include linear-gradient(to top, darken($lightgreen,10%) 0%, $lightgreen 50%)
+
+%button-glass
+	@extend %button-plain
+	@include linear-gradient(to top, $lightgreen 50%, lighten($lightgreen,10%) 50%)
+	&:focus,
+	&:hover
+		@include linear-gradient(to top, darken($lightgreen,10%) 50%, $lightgreen 50%)
+
+%dropdown-button
+	@include dropdown-base
+	@include button-base($align: centered)
+	@include button-size($padding:nth($btn-sizes,2), $radius:false, $full-width:false, $is-input:true)
+
+%button-standard-input
+	@include button-base($align: centered)
+	@include button-size($padding:nth($btn-sizes,2), $radius:false, $full-width:false, $is-input:true)
+
+%button-beside
+	background-color: white
+	margin: 0.42em 0
+	border: 1px solid $darkgrey
+	border-left: 0
+	border-radius: 0
+
+//------------------------------- SELECTORS -------------------------------//
+@if $html-buttons-classes
+	.button
+		box-sizing: initial
+		@extend %button-standard-input
+		@extend %button-gradient
+	.button-pill
+		box-sizing: initial
+		@include button-base($align: centered)
+		@include button-size($padding:nth($btn-sizes,2), $radius:1.5em, $full-width:false, $is-input:true)
+		@extend %button-gradient
+	.button-glass
+		box-sizing: initial
+		@extend %button-standard-input
+		@extend %button-glass
+	.button-pill-glass
+		box-sizing: initial
+		@include button-base($align: centered)
+		@include button-size($padding:nth($btn-sizes,2), $radius:nth($radio-pill-sizes,2), $full-width:false, $is-input:true)
+		@extend %button-glass
+	.button-search
+		@extend %button-beside

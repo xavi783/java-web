@@ -1,0 +1,109 @@
+
+.lang
+	display: flex
+	flex-flow: row nowrap
+	position: absolute
+	top: 5px
+	right: 1em
+	border-radius: 2px
+	width: 4.8em
+	height: 1.4em
+	background-color: $darkgrey
+	div
+		flex: 1 1
+		margin: 0.2em
+		background-size: contain
+		cursor: pointer
+	#en_flag
+		background-image: url('images/flags/en.png')
+	#es_flag
+		background-image: url('images/flags/es.png')
+
+.header-main
+	width: 100%
+	display: inline-block
+	background-color: $lightgrey
+	margin-top: 0
+	margin-bottom: 0
+	padding-top: 0.8em
+	.front-panel-logo
+		padding-top: 0.5em
+	#logo
+		background-image: url('images/logo.fw.png')
+		height: 80px
+		width: 131px
+		border: none
+	.content-flow
+		margin-bottom: 0.8em
+		@media #{mquery(0, $mobile)}
+			width: 70%
+	.main
+		min-height: 0
+		.field-container
+			label
+				top: 1.1em
+.panel-login
+	@media #{mquery(0, $mobile)}
+		width: 100%		
+	[type="button"]
+		min-width: 80px
+		max-width: 180px
+		&:last-child
+			margin-top: 0.8em
+		@media #{mquery(0, $mobile)}
+			width: 25%
+			float: right
+			margin-right: 0px
+.user-form
+	max-width: 18em
+	padding: 0.8em 1.2em
+	position: absolute
+	z-index: 99
+	right: 3em
+	top: 4.5em
+	box-shadow: 5px 5px 30px
+	background-color: $lightgrey
+#show-signin-form
+	margin-top: 0.5em
+	margin-bottom: 0.5em
+.user-btn
+	width: 30% !important
+.user-btns
+	display: inline-block
+	margin: 0 !important
+	padding-top: 0.3em
+	padding-left: 0.1em
+	font-size: 1.4em
+	text-align: left
+.error-hook
+	padding: 0.2em 0 0.4em 0
+	text-align: center
+.profile::before,
+.logout-btn::before
+	@extend .h5
+.logout-btn
+	padding-top: 0.4em
+#user-profile
+	padding-bottom: 1em
+	padding-top: 1em
+	padding-left: 0.5em
+	a
+		float: none
+#notify-cookies
+	position: absolute
+	left: 0
+	top: 1em
+	z-index: 99
+	width: 40%
+	height: 80px
+	.notifier
+		position: relative
+		background-color: $bg-color
+		height: 100%
+		width: 100%
+		.close-icon
+			position: absolute
+			right: 3px
+			top: 3px
+			margin: 0
+			width: auto

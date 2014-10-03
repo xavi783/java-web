@@ -1,0 +1,184 @@
+//--------------------------------- VARIABLES ---------------------------------//
+$html-navigation-classes: true !default
+$disabled-opacity: 0.6 !default
+$onhover-dark: 0.1 !default
+
+$html-navigation-classes: false !default
+$nav-onhover-dark: $onhover-dark
+$nav-disabled-opacity: $disabled-opacity
+$nav-border-default: $border-default $darkgrey
+$nav-radius: 10px !default
+
+//--------------------------------- MIXINS ---------------------------------//
+@mixin navbar-behaviour($float: $direction, $children: true, $vertical: true, $behaviours: hover,  $float-children: block,  $cursor: pointer)
+	$behaviours: append($behaviours, focus)
+	ul li
+		cursor: $cursor
+		display: block
+		position: relative
+		@if $float
+			float: $direction
+		@else
+			clear: $direction
+		@include border-box()
+		a
+			display: block
+			text-decoration: none
+		@if $children
+			ul
+				display: none
+				@if $vertical
+					position: absolute
+					z-index: 99
+				@else
+					position: relative
+				@include border-box()
+		@each $behaviour in $behaviours
+			&:#{$behaviour} ul
+				display: $float-children
+			&:#{$behaviour} ul li
+				float: none
+
+@mixin navbar-sizes($elems: 12, $e1-pad: 1em 0 1em 0, $e1-align: center, $e2-pad:  0.25em, $e2-align: $direction, $vertical: true)
+	@if $vertical
+		margin-top: 1em
+		margin-bottom: nth($e1-pad, 1) + nth($e1-pad, 3) + 3em
+	ul li
+		width: numel-perc($elems)
+		padding: $e1-pad
+		text-align: $e1-align
+		ul
+			@if $vertical
+				margin-top: nth($e1-pad, 3)
+			@else
+				top: nth($e1-pad, 3)
+			width: 100%
+			li
+				padding: $e2-pad
+				text-align: $e2-align
+				width: 100%
+	ul li:last-child
+		margin-#{$opposite}: 0
+
+@mixin navbar-colors($bg:$lightgreen, $nav-onhover:$darkgreen, $nav-font-color:$brown, $disabled:false, $gradient:false, $behaviours: hover)
+
+	$behaviours: append($behaviours, focus)
+	@if $bg
+		background-color: $bg
+		color: $nav-font-color
+		@each $behaviour in $behaviours
+			&:#{$behaviour}
+				@if $nav-onhover
+					background-color: $nav-onhover
+					@if $gradient
+						background: $nav-onhover
+				@else
+					background-color: darken($bg, 10%)
+					@if $gradient
+						background: darken($bg, 10%)
+				color: darken($nav-font-color, 10%)
+
+	// We can set $disabled:true to create a disabled transparent button.
+	@if $disabled
+		cursor: $cr-default
+		opacity: $nav-disabled-opacity
+		@if $experimental
+			-webkit-box-shadow: none
+		box-shadow: none
+		@each $behaviour in $behaviours
+			&:#{$behaviour}
+				background-color: $bg
+
+@mixin nav-border($nav-border: $nav-border-default, $vertical: true, $last-child: true)
+	@if $nav-border
+		@if $vertical
+			border-top: $nav-border
+			border-right: $nav-border
+			border-left: $nav-border
+			border-bottom: none
+			@if $last-child
+				&:last-child
+					border-bottom: $nav-border
+			@else
+				&:last-child
+					border-bottom: none
+		@else
+			border-top: $nav-border
+			border-bottom: $nav-border
+			border-#{$direction}: $nav-border
+			border-#{$opposite}: none
+			@if $last-child
+				&:last-child
+					border-#{$opposite}: $nav-border
+			@else
+				&:last-child
+					border-#{$opposite}: none
+	@else
+		border: none
+		@if $last-child
+			&:last-child
+				border: none
+
+//--------------------------------- EXTENDABLES ---------------------------------//
+%horizontal-navbar
+	clear: both
+	width: 90%
+	@include navbar-behaviour()
+	@include navbar-sizes($elems: 6)
+	ul li
+		@if $nav-radius
+			&:first-child
+				@include side-radius(left, $nav-radius)
+			&:last-child
+				@include side-radius(right, $nav-radius)
+		@include navbar-colors()
+		@include nav-border($vertical: false)
+		ul li
+			@if $nav-radius
+				&:first-child
+					@include side-radius(left, 0)
+				&:last-child
+					@include side-radius(right, 0)
+					@include side-radius(bottom, $nav-radius)
+			@include nav-border($vertical: true)
+			@include navbar-colors($bg:$lightgrey, $nav-onhover:$darkgrey, $nav-font-color: #000)
+
+%vertical-navbar
+	clear: both
+	width: 30%%
+	@include navbar-behaviour($float: false, $vertical: false)
+	@include navbar-sizes($elems: 1, $vertical: false)
+	ul li
+		@if $nav-radius
+			&:first-child
+				@include side-radius(top, $nav-radius)
+			&:last-child
+				@include side-radius(bottom, $nav-radius)
+			ul li
+				&:last-child
+					@include side-radius(bottom, 0px)
+		@include navbar-colors()
+		@include nav-border()
+		ul li
+			@if $nav-radius
+				&:first-child
+					@include side-radius(top, 0px)
+				&:last-child
+					@include side-radius(bottom, 0px)
+			@include nav-border($last-child: false)
+			border-right: none
+			border-left: none	
+			@include navbar-colors($bg:$lightgrey, $nav-onhover:$darkgrey, $nav-font-color: #000)
+		@if $nav-radius
+			&:last-child
+				ul li
+					&:last-child
+						@include side-radius(bottom, $nav-radius)
+
+//--------------------------------- HTML CLASSES ---------------------------------//
+@if $html-navigation-classes
+	.topbar
+		//@extend %horizontal-navbar
+		
+	.navmenu
+		@extend %vertical-navbar

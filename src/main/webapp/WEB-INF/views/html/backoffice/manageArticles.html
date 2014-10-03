@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.title}"
+      lang="en">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <link href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script data-main="..\..\resources\uk\main" src="..\..\resources\uk\require.js"></script>
+</head>
+<body class="body-front body-editor">
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 95px;"></div>
+	<div th:replace="html/includes/blog :: #user-areas-container" class="col-2 editor-area1"></div>
+
+	<div id="manageArticlesView" class="col-7 editor-area2">
+		<div class="row"></div>
+		<div class="row" style="padding: 0 4%">
+			<div class="col-8"><div id="articles-table"></div></div>
+		</div>
+	</div>
+
+	<div id="manageArticlesOptions" class="panel box2 shadow-box col-7 editor-area3">
+		<form action="" class="col-6 manage-user-forms">
+			<fieldset>
+				<legend>Article Management</legend>
+				<div class="col-8">
+					<div class="field-container">
+						<input required="required" id="authorities" type="text"></input>
+						<label for="text">Authorities</label>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="row"><input id="updateUsers" type="submit" class="col-6 last" value="Update"></input></div>
+					<div class="row"><input id="blockUsers"  type="submit" class="col-6 last" value="Block" ></input></div>
+					<div class="row"><input id="removeUsers" type="submit" class="col-6 last" value="Remove"></input></div>
+				</div>
+			</fieldset>
+		</form>
+
+		<form action="" class="col-6 manage-user-forms">
+			<fieldset>
+				<legend>Category Management</legend>
+				<div class="col-8">
+					<div class="field-container">
+						<input required="required" id="landing" type="text"></input>
+						<label for="text">Landing URL</label>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="row"><input id="updateRoles" type="submit"  class="col-6 last" value="Update"></input></div>
+					<div class="row"><input id="deleteRoles"  type="submit" class="col-6 last" value="Delete"></input></div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="editor-area4"><div id="tree"></div></div>
+</body>
+</html>

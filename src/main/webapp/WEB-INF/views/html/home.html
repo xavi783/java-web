@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      lang="es">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front" th:inline="text">	
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 109.5px;"></div>
+
+	<main class="centered col-10 main">		
+		<section class="desk front-image">
+			<div>
+				<h1 data-title="Sections" th:text="${template.get('sections.title')}">Sections</h1>
+				<a href="./blog/home.html" th:href="@{${template.get('links.blog')}}">
+					<button class="col-4 button-pill-glass first" th:utext="${template.get('sections.content[0]')}">Blog</button>
+				</a>
+				<a href="./shop/home.html" th:href="@{${template.get('links.shop')}}">
+					<button class="col-4 button-pill-glass" th:utext="${template.get('sections.content[1]')}">Shop</button>
+				</a>
+			</div>
+			<div>
+				<h1 data-title="Updates" th:text="${template.get('updates.title')}">Updates</h1>
+				<div class="tabs">
+					<div class="hide-panel-container">
+						<input type="checkbox" id="hide-check01" class="hidden"></input>
+						<label class="front-label" for="hide-check01" th:utext="${template.get('updates.content[0]')}">Blog
+							<span class="hidden caret-rigth01"></span>
+						</label>
+						<div class="hide-panel"></div>
+					</div>
+					<div class="hide-panel-container">
+						<input type="checkbox" id="hide-check02" class="hidden"></input>
+						<label class="front-label" for="hide-check02" th:utext="${template.get('updates.content[1]')}">Shop
+							<span class="hidden caret-rigth01"></span>
+						</label>
+						<div class="hide-panel"></div>
+					</div>
+				</div>
+			</div>
+			<header id="slogan" class="h1 slogan" th:utext="${template.get('slogan')}"> Giving steps into cloud.<br/>Improving the web. </header>
+		</section>
+		<section class="front-tag">
+			<div>
+				<header>
+					<h1 th:text="${template.get('frontTag[0].header')}">
+						Software &amp; Design Workflow
+					</h1>
+				</header>
+				<p class="h5" th:text="${template.get('frontTag[0].text')}">
+					Designing strategies and software architectures to optimize workflow and make more agile development processes
+				</p>
+			</div>
+			<div class="img-front" th:utext="${template.get('frontTag[0].icon')}">&#xe001;</div>
+		</section>
+		<section class="front-tag">
+			<div>
+				<header>
+					<h1 th:text="${template.get('frontTag[1].header')}">
+						Java Technologies
+					</h1>
+				</header>
+				<p class="h5" th:text="${template.get('frontTag[1].text')}">
+					Making studies about Java technologies implementation and frameworkslike Hibernate, Spring and others
+				</p>
+			</div>
+			<div class="img-front" th:utext="${template.get('frontTag[1].icon')}">&#xe004;</div>
+		</section>
+		<section class="front-tag">
+			<div>
+				<header>
+					<h1 th:text="${template.get('frontTag[2].header')}">
+						Front End Programming
+					</h1>
+				</header>
+				<p class="h5" th:text="${template.get('frontTag[2].text')}">
+					Solving practical design and programming cases related with front-end technologies such as HTML5, CSS3 and JavaScript
+				</p>
+			</div>
+			<div class="img-front" th:utext="${template.get('frontTag[2].icon')}">&#xe002;</div>
+		</section>
+		<section class="front-tag">
+			<div>
+				<header>
+					<h1 th:text="${template.get('frontTag[3].header')}">
+						Advance Study Cases
+					</h1>
+				</header>
+				<p class="h5" th:text="${template.get('frontTag[3].text')}">
+					Studying practical cases of full stack web applications using the most advanced technologies
+				</p>
+			</div>
+			<div class="img-front" th:utext="${template.get('frontTag[3].icon')}">&#xe006;</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+	    <div class="link-list">
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[0]')}">FAQ</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[1]')}">Contact Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[2]')}">About Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[3]')}">Recommended Links</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[4]')}">Our Address</a>
+	    </div>
+	</footer>
+
+	<div th:replace="html/includes/header :: footerFragment">
+	    <script src="../resources/jui/jui.min.js"></script>
+		<script src="../resources/pui/pui-1.0.js"></script>
+	    <script src="../resources/bb/underscore-min.js"></script>
+	    <script src="../resources/bb/backbone-min.js"></script>
+		<script src="../resources/uk/uk.js"></script>
+		<script src="../resources/uk/uk-blog.js"></script>
+	</div>
+
+</body>
+</html>

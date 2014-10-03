@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+	    <property name="connectionFactories">
+	        <list>
+	            <bean name="twitterConnectionFactory" class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
+	                <constructor-arg value="${twitter.consumerKey}" />
+	                <constructor-arg value="${twitter.consumerSecret}" />				
+	            </bean>
+	        </list>
+	    </property>
+	</bean>
+	 
+	<!-- Cambiar el facotry method de produccion -->
+	<beans>
+        <bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" 
+            factory-method="noOpText" />
+    </beans>
+    	
+</beans>

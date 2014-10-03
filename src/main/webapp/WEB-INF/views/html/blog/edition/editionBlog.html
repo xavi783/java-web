@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.title}"
+      lang="en">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../../../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front body-editor">
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 95px;"></div>
+
+	<div th:replace="html/includes/blog :: #user-areas-container" class="col-2 editor-area1"></div>
+
+	<div class="editor-area4"><div id="tree"></div></div>
+
+	<div th:replace="html/includes/header :: footerFragment">
+		<script src="../../../resources/jui/jui.min.js"></script>
+		<script src="../../../resources/pui/pui-1.0.js"></script>
+		<script src="../../../resources/bb/underscore-min.js"></script>
+		<script src="../../../resources/bb/backbone-min.js"></script>
+		<script src="../../../resources/uk/uk.js"></script>
+		<script src="../../../resources/uk/uk-blog.js"></script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+target
+target/*
+target*/
+src/main/webapp/WEB-INF/views/resources/theme/.sass-cache/*
+src/main/webapp/WEB-INF/views/resources/theme/.sass-cache/*
+src/main/webapp/WEB-INF/views/resources/theme/.sass-cache*/
+src/main/webapp/WEB-INF/views/resources/uk/.sass-cache/*
+src/main/webapp/WEB-INF/views/resources/uk/.sass-cache/*
+src/main/webapp/WEB-INF/views/resources/uk/.sass-cache/*
+src/main/webapp/WEB-INF/database
+src/main/webapp/WEB-INF/lib
+src/main/webapp/WEB-INF/locales
+src/main/webapp/WEB-INF/social

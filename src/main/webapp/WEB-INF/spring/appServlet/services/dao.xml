@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- inyectamos el creador de sesiones en los DAO -->
+	
+	<!--************************-->
+	<!--******** Login *********-->
+	<!--************************-->	
+	<bean id="userDao" name="userDao"
+		class="com.uk.login.dao.impl.UserDaoImpl">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<bean id="authDao" name="authDao"
+		class="com.uk.login.dao.impl.AuthoritiesDaoImpl">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<bean id="loginDetailsDao" name="loginDetailsDao"
+		class="com.uk.login.dao.impl.LoginDetailsDaoImpl">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<!--************************-->
+	<!--********* Blog *********-->
+	<!--************************-->
+	<bean id="categoriesDao" name="categoriesDao"
+		class="com.uk.blog.mysql.dao.CategoriesDao">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<bean id="categoriesBuilder" name="categoriesBuilder"
+		class="com.uk.blog.utils.CategoriesBuilder">
+		<property name="categoriesDao" ref="categoriesDao"></property>
+	</bean>
+	
+	<bean id="rolesList" name="rolesList"
+		class="com.uk.login.utils.RolesList">
+		<property name="loginDetailsDao" ref="loginDetailsDao"></property>
+	</bean>
+		
+	<bean id="usersList" name="usersList"
+		class="com.uk.login.utils.UsersList">
+		<property name="userDao" ref="userDao"></property>
+		<property name="authDao" ref="authDao"></property>
+	</bean>
+	
+	<!--************************-->
+	<!--********* Shop ********-->
+	<!--************************-->		
+	<bean id="productDao" name="productDao"
+		class="com.uk.shop.mysql.dao.ProductDao">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<bean id="familiesDao" name="familiesDao"
+		class="com.uk.shop.mysql.dao.FamilyDao">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	
+	<bean id="productMongoDao" name="productMongoDao"
+		class="com.uk.shop.mongo.dao.ProductMongoDao">
+		<property name="mongodao" ref="mongodao"></property>
+		<property name="collectionName" value="products"></property>
+	</bean>
+	
+	<bean id="commentsMongoDao" name="commentsMongoDao"
+		class="com.uk.shop.mongo.dao.CommentsMongoDao">
+		<property name="mongodao" ref="mongodao"></property>
+		<property name="collectionName" value="products_comments"></property>
+	</bean>
+
+</beans>

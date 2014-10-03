@@ -1,0 +1,252 @@
+$path-to-icons: "icons/";
+$icon-bg-radius: 5px;
+
+@font-face {
+	font-family: 'icons';
+	src:url($path-to-icons + 'icons.eot');
+	src:url($path-to-icons + 'icons.ttf') format('truetype'),
+		url($path-to-icons + 'icons.woff') format('woff'),
+		url($path-to-icons + 'icons.svg#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@include keyframes(anim-rotate) {
+  0% { @include transform(rotate(0));}
+  100% { @include transform(rotate(360deg));}
+}
+%icons{
+	color: $icon-front-color;
+	cursor: $cr-pointer;
+}
+%icons-before {
+	@include radius($icon-bg-radius);
+	font-family: 'icons';
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+%icons-hover{
+	color: $icon-hover-color;
+}
+
+[data-icon]{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: attr(data-icon);
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.twitter-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00f";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.facebook-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00e";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.google-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e010";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.user-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e008";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.logout-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00a";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.rt-row-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e017";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.close-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00b";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.expand-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e038";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+	&:hover::before{
+		content: "\e030";
+	}
+}
+.sort-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e032";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.alpha-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e033";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.pdf-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00d";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.sort-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e032";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.edit-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e007";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.x-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e00b";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.cart-empty-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e025";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.cart-full-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e026";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.search-icon{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e009";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.font-icon{
+	@extend %icons-before;
+}
+.caret-rigth01{
+	position: relative;
+	float: right;
+	margin-top: 0.2em;
+	@include triangle(0.75em, #000, right);
+}
+.full-star{
+	@extend %icons;
+	&::before{
+		@extend %icons-before;
+		content: "\e042";
+	}
+	&:hover{
+		@extend %icons-hover;		
+	}
+}
+.spinner::before {
+	@include transform(translate3d(0,0,0));
+	content: attr(data-spinner);
+	font-family: 'icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	opacity: 0.8;
+}
+.spinner {
+	@include animation(anim-rotate 2s infinite linear);
+	@include transform(translate3d(0,0,0));
+	display: inline-block;
+	color: $icon-front-color;
+}

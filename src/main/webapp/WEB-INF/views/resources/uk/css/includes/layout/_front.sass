@@ -1,0 +1,127 @@
+
+.body-front
+	background-color: $darkgrey
+
+.front-image
+	background-image: url('images/background_low.jpg')
+	background-size: cover
+	position: relative
+	@include outer-bothside-shadows
+
+.desk
+	position: relative
+	div:nth-child(1)
+		width: 49%		
+		float: left
+		h1
+			position: relative
+			color: darken($darkgrey,15%)
+		.first
+			margin-right: 100% !important
+			margin-bottom: 0.5em !important
+			margin-top: 0.5em !important
+	div:nth-child(2)
+		width: 49%		
+		float: right
+		position: relative
+		@media #{mquery(0, 464px)}
+			display: none
+		h1
+			color: darken($darkgrey,15%)
+			text-align: right
+			padding-right: 0
+			position: relative
+		.tabs
+			width: 100%
+			position: absolute
+			right: -0.8em
+			top: -0.8em
+			z-index: 97	
+	.slogan
+		position: absolute
+		bottom: 0em
+		z-index: 97
+		width: 100%
+		font-size: 3.5em
+		line-height: 1.15em
+		text-align: center
+		color: $bg-color
+		@media #{mquery($tabH,1520px)}
+			font-size: 2.5em
+		@media #{mquery($tabV,$tabH)}
+			font-size: 2em
+		@media #{mquery(371px,$tabV)}
+			font-size: 1.8em
+		@media #{mquery(0px,371px)}
+			display: none
+
+.hide-panel-container
+	$total-bc-width: 1.35em
+	width: 100%
+	position: absolute
+	right: 0
+	.hide-panel
+		width: 0
+		height: 54em
+		position: absolute
+		right: 0
+		z-index: 99
+		overflow: hidden
+		background-color: $darkgrey
+		box-shadow: inset 0px 0px 10px 0px #000
+		@include transition (width $time-animation-hide-panel ease-out)
+	label
+		@extend .h5
+		padding: 0.8em
+		width: 5.8em
+		position: absolute
+		right: 0
+		z-index: 98
+		border-color: darken($darkgrey, 10%)
+		background-color: $darkgrey
+		@include transition (right $time-animation-hide-panel ease-out)
+		margin: 0 !important
+	label::before
+		display: none
+	[for="hide-check01"]
+		top: 4em
+	[for="hide-check02"]
+		top: 6.6em
+	[type="checkbox"]
+		display: none
+	[type="checkbox"]:checked ~ .hide-panel
+		width: ($n-hide-panel*100%)
+	[type="checkbox"]:checked ~ label
+		right: ($n-hide-panel*100%)
+	[type="checkbox"]:checked ~ label > .caret-rigth01
+		display: block
+
+.hide-panel-container:nth-child(2)
+	label
+		background-color: darken($darkgrey, 10%)
+
+.front-tag
+	@include outer-bothside-shadows
+	position: relative
+	border-bottom: 1px solid $darkgrey
+	border-top: 1px solid $darkgrey
+	background-color: $lightgrey
+	display: flex
+	flex-direction: row
+	div
+		@include clearfix
+		display: flex
+		flex-direction: column
+		justify-content: center
+		width: $first-div-width
+		text-align: center
+		color: $green1
+		p
+			width: 80%
+			margin: 0.8em auto
+			color: $green1
+			text-align: center
+	.img-front
+		width: 100%-$first-div-width
+		font-family: 'icons'
+		font-size: 8em

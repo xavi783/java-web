@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      lang="es">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front" th:inline="text">
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 140.5px;"></div>
+	
+	<div class="row">
+		<nav id="lista-shop" class="col-10 centered topbar" th:include="html/includes/inserts :: navbar(${language})"></nav>
+	</div>
+
+	<div id="main-slider" class="centered col-10 panel slider" style="height: 20em; margin-top: 1em; padding: 0;" data-delay="3000">
+		<div class="ctrl_next">&#xe038;</div>
+		<div class="ctrl_prev">&#xe039;</div>
+		<div class="ctrl_play">&#xe036;</div>
+		<div class="slides-container">
+			<div class="slide" style="text-align: center; background: white;">
+				SLIDE 1
+			</div>
+			<div class="slide" style="text-align: center; background: white;">
+				SLIDE 2
+			</div>
+			<div class="slide" style="text-align: center; background: white;">
+				SLIDE 3
+			</div>
+			<div class="slide" style="text-align: center; background: white;">
+				SLIDE 4
+			</div>
+		</div>  
+	</div>
+	
+	<div class="centered col-10">
+		<div class="col-4 panel" style="height: 30em; margin-top: 1em">
+			
+		</div>
+		<div class="col-4 panel" style="height: 30em; margin-top: 1em">
+			
+		</div>
+		<div class="col-4 panel" style="height: 30em; margin-top: 1em">
+			
+		</div>
+	</div>
+
+	<div style="margin-bottom: 4.75em;"></div>
+	
+	<footer class="footer">
+	    <div class="link-list">
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[0]')}">FAQ</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[1]')}">Contact Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[2]')}">About Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[3]')}">Recommended Links</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[4]')}">Our Address</a>
+	    </div>
+	</footer>
+
+	<div th:replace="html/includes/header :: footerFragment">
+	    <script src="../../resources/jui/jui.min.js"></script>
+		<script src="../../resources/pui/pui-1.0.js"></script>
+	    <script src="../../resources/bb/underscore-min.js"></script>
+	    <script src="../../resources/bb/backbone-min.js"></script>
+		<script src="../../resources/uk/uk.js"></script>
+		<script src="../../resources/uk/uk-blog.js"></script>
+		<script src="../../resources/uk/uk-shop.js"></script>
+	</div>
+
+</body>
+</html>

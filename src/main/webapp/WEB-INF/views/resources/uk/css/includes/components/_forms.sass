@@ -1,0 +1,196 @@
+
+$html-forms-classes: true !default
+$html-advanced-forms-classes: false !default
+
+//------------------------------ VARIABLES ------------------------------//
+$form-main-color: #a7a7a7 !default
+$form-border: 1px solid $form-main-color !default
+
+$icon-family-items: "icons" "\e01f" "\e020" !default
+$icon-color: $green1 !default
+$icon-margin: 0 0.4em 0 0 !default
+
+$label-color: darken(#B1B1B1, 10%) !default
+
+//------------------------------ MIXINS ------------------------------//
+@mixin custom-input($target: "checkbox", $ic-fonts: $icon-family-items, $ic-color: $icon-color, $ic-margin: $icon-margin)
+	input[type=#{$target}]
+		display: none
+		margin: $ic-margin
+	input[type=#{$target}] + label
+		display: inline-block
+		vertical-align: middle
+		cursor: pointer
+		margin: $ic-margin
+	input[type=#{$target}] + label:before
+		content: nth($ic-fonts,2)
+		margin: $ic-margin
+		font-family: nth($ic-fonts,1)
+		color: $ic-color
+	input[type=#{$target}]:checked + label:before
+		content: nth($ic-fonts,3)
+		color: $ic-color
+		margin: $ic-margin
+
+//------------------------------ TAGS ------------------------------//
+fieldset
+	display: block
+	padding: flex-gutter()
+	border: $form-border
+legend
+	display: block
+	padding: 0.25em 1em
+	font-style: italic
+	color: $form-main-color	
+input
+	display: block
+	@include border-box
+	margin: 0.5em 0
+	width: 100%
+input[type="text"], input[type="password"], input[type="email"], input[type="search"],
+input[type="datetime"], input[type="url"], input[type="range"], input[type="time"],
+input[type="date"], input[type="week"]
+	padding: 0.9em 0.5em 0.5em 0.5em
+input[type="reset"]
+	@extend .button
+input[type="submit"]
+	@extend .button-pill
+input[type="button"]
+	@extend .button-glass
+input[type="search"]
+	margin-right: 0
+@include custom-input()
+@include custom-input($target: "radio", $ic-fonts: "icons" "\e01e" "\e01d")
+.resizeable
+	resize: both 
+.fixed
+	resize: none
+
+//------------------------------ EXTENDABLES ------------------------------//
+%label-base
+	position: absolute
+	top: 0.8em
+	left: 0.5em
+	color: $label-color
+%validated
+	position: absolute
+	top: 0.2em
+	right: 0.7em
+	left: initial
+	font-size: 0.7em
+	font-weight: bold
+
+//------------------------------ CLASSES ------------------------------//
+%floating-field
+	position: absolute
+	z-index: 10
+	top: 4em
+	right: 7em
+	padding: 0.8em
+%select-mask
+	position: relative
+	border: 1px solid gray
+	background-color: white
+	select
+		margin: 0
+		padding: 0.5em
+		border: 0
+		-webkit-appearance: none  
+		-moz-appearance: none 	
+		appearance: none 		
+		width: 100% 			
+		text-indent: 0.01px 	
+		text-overflow: ""  		
+		background-color: transparent
+	&::after
+		content: "\e030"
+		position: absolute
+		top: 0.3em
+		right: 0.5em
+		left: initial
+		font-size: 1.2em
+		font-family: 'icons'
+		color: $label-color
+
+%field-container
+	position: relative
+	label
+		@extend %label-base
+	label:hover, label:focus,
+	input:hover ~ label, input:focus ~ label,
+	textarea:hover ~ label, textarea:focus ~ label
+		display: none
+	input:required ~label::after
+		content: "*"
+		margin-left: 0.2em
+		color: red
+	input ~label::before
+		margin-right: 0.3em
+		font-family: 'icons'
+	input.username ~label::before
+		content: "\e008"
+	input[type="search"] ~label::before
+		content: "\e009"
+	input[type="url"] ~label::before
+		content: "\e02c"
+	input[type="password"] ~label::before
+		content: "\e02a"
+	input[type="email"] ~label::before
+		content: "\e02b"
+	.valid ~label,
+	input:required:valid ~label
+		@extend %validated	
+		color: green
+	.invalid
+		border-color: red
+	.invalid ~label
+		@extend %validated
+		color: red
+
+@if $html-forms-classes
+	.select-mask
+		@extend %select-mask
+	.field-container
+		@extend %field-container
+	.floating-field
+		@extend %floating-field
+
+@if $html-advanced-forms-classes
+	.registry
+		@include radius($global-radius)
+		background-color: $darkgrey
+		//Los media queries deben ir sobre el contenedor superior del form
+		@media #{mquery($netbook)}
+			width: 25%
+		@media #{mquery($tabV,$netbook)}
+			width: 30%
+		@media #{mquery(550px,$tabV)}
+			width: 40%
+		@media #{mquery(370px,550px)}
+			width: 60%
+		@media #{mquery(0,370px)}
+			width: 100%
+		max-width: 300px
+		min-width: 215px
+		position: absolute
+		z-index: 99
+		fieldset
+			@include radius($global-radius)
+			border: $border01
+			padding: 1em
+		input[type="submit"]
+			width: 25%
+			min-width: 6em
+		label
+			color: $lightgrey
+			display: inline-block
+			padding: 1em 0 0.25em 0
+		[data-icon]
+			display: inline-block
+			font-size: 1.5em
+			padding: 0 3px
+		.icons
+			padding: 1em 0 0.25em 0
+			text-align: right
+		.registry-error
+			display: none

@@ -1,0 +1,209 @@
+
+//------------------------------ BASE ------------------------------//
+
+  @mixin vendor($property,$value){
+    -webkit-#{$property}: #{$value};
+    -moz-#{$property}: #{$value};
+    -ms-#{$property}: #{$value};
+    -o-#{$property}: #{$value};
+  }
+
+  @function strip($num){
+    @return $num/($num*0+1);
+  }
+
+  @function to-em($value, $base-value: $size)  {
+    $value: strip($value)/strip($base-value)*1em;
+    @if ($value == 0em) {
+      $value: 0;
+    }
+    @return $value;
+  }
+
+  @function em-calc($values, $base-value: $size) {
+    $max: length($values);
+    @if $max == 1 {
+      @return to-em(nth($values, 1), $base-value);
+    }
+    $emValues: ();
+    @for $i from 1 through $max {
+      $emValues: append($emValues, to-em(nth($values, $i), $base-value));
+    }
+    @return $emValues;
+  }
+
+  @function numel-perc($numel){
+    $ans: 100/$numel + "%";
+    @return #{$ans};
+  }
+
+//------------------------------ GLOBAL-STYLES ------------------------------//
+
+//------------------------------ MEDIA-QUERY ------------------------------//
+  //default: "only screen and (max-width: #{$bp01})"
+  @function mquery($bp-min: 0, $bp-max: $mobile, $media-query: "only", $media-type: "screen"){
+    
+    $n-types: length($media-type);
+    $media-types: " ";
+    $sizes: "";
+
+    @if $n-types > 1{
+      @for $i from 1 through $n-types {
+        $media-types: $media-types + " and " + nth($media-type, $i);
+      }
+    } @else {
+      $media-types: $media-types + $media-type;
+    }
+
+    @if $bp-min > 0 {
+      $sizes: "(min-width: #{$bp-min}";
+      @if $bp-max > $bp-min {
+        $sizes: $sizes + ") and (max-width: #{$bp-max}";
+      }
+      $sizes: " and " + $sizes + ")";
+    } @else {
+      @if $bp-max > $bp-min {
+        $sizes: $sizes + " and (max-width:#{$bp-max})";
+      }
+    }
+
+    @return ($media-query + $media-types + $sizes);
+  }
+
+//------------------------------ BOX-MODEL ------------------------------//
+  @mixin border-box($box-type: border-box) {
+    @if $box-type {
+      @if $experimental {
+        -webkit-box-sizing: $box-type;
+        -moz-box-sizing: $box-type;
+      }
+      box-sizing: $box-type;
+    }
+  }
+
+  @mixin radius($radius:$global-radius) {
+    @if $radius {
+      @if $experimental {
+        -webkit-border-radius: $radius;
+        -moz-border-radius: $radius;
+      }
+      border-radius: $radius;
+    }
+  }
+
+  @mixin side-radius($side, $radius:$global-radius) {
+    @if $side == left {
+      @if $experimental {
+        -moz-border-radius-bottomleft: $radius;
+        -moz-border-radius-topleft: $radius;
+        -webkit-border-bottom-left-radius: $radius;
+        -webkit-border-top-left-radius: $radius;
+      }
+      border-bottom-left-radius: $radius;
+      border-top-left-radius: $radius;
+    }
+    @else if $side == right {
+      @if $experimental {
+        -moz-border-radius-topright: $radius;
+        -moz-border-radius-bottomright: $radius;
+        -webkit-border-top-right-radius: $radius;
+        -webkit-border-bottom-right-radius: $radius;
+      }
+      border-top-right-radius: $radius;
+      border-bottom-right-radius: $radius;
+    }
+    @else if $side == top {
+      @if $experimental {
+        -moz-border-radius-topright: $radius;
+        -moz-border-radius-topleft: $radius;
+        -webkit-border-top-right-radius: $radius;
+        -webkit-border-top-left-radius: $radius;
+      }
+      border-top-right-radius: $radius;
+      border-top-left-radius: $radius;
+    }
+    @else if $side == bottom {
+      @if $experimental {
+        -moz-border-radius-bottomright: $radius;
+        -moz-border-radius-bottomleft: $radius;
+        -webkit-border-bottom-right-radius: $radius;
+        -webkit-border-bottom-left-radius: $radius;
+      }
+      border-bottom-right-radius: $radius;
+      border-bottom-left-radius: $radius;
+    }
+  }
+
+//------------------------------ GRADIENTS ------------------------------//
+  @mixin linear-gradient($pos, $G1, $G2: null,
+                         $G3: null, $G4: null,
+                         $G5: null, $G6: null,
+                         $G7: null, $G8: null,
+                         $G9: null, $G10: null) {
+    // Detect what type of value exists in $pos
+    $pos-type: type-of(nth($pos, 1));
+    $pos-spec: null;
+    $pos-degree: null;
+    // If $pos is missing from mixin, reassign vars and add default position
+    @if ($pos-type == color) or (nth($pos, 1) == "transparent")  {
+      $G10: $G9; $G9: $G8; $G8: $G7; $G7: $G6; $G6: $G5;
+       $G5: $G4; $G4: $G3; $G3: $G2; $G2: $G1; $G1: $pos;
+       $pos: null;
+    }
+    @if $pos {
+      $positions: _linear-positions-parser($pos);
+      $pos-degree: nth($positions, 1);
+      $pos-spec:   nth($positions, 2);
+    }
+    $full: $G1, $G2, $G3, $G4, $G5, $G6, $G7, $G8, $G9, $G10;
+    background: -webkit-linear-gradient($pos-degree $full); // Safari 5.1+, Chrome
+    background: unquote("linear-gradient(#{$pos-spec}#{$full})");
+  }
+
+@mixin outer-bothside-shadows($length: 20px, $color-shadow: #000, $style: inset){
+  &:before{
+    -webkit-box-shadow: $style (-$length) 0px $length (-$length) $color-shadow;
+    box-shadow: $style (-$length) 0px $length (-$length) $color-shadow;
+    content: " ";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: (-$length);
+    width: $length;
+  }
+  &:after{
+    -webkit-box-shadow: $style $length 0px $length (-$length) $color-shadow;
+    box-shadow: $style $length 0px $length (-$length) $color-shadow;
+    content: " ";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: (-$length);
+    width: $length;
+  }
+}
+
+@mixin inner-text-shadows($text-align: left, $color-shadow: rgba(255,255,255,.1)){
+  [data-title]:before, [data-title]:after{
+    position: absolute;
+    content: attr(data-title);
+    color: $color-shadow;
+  }
+  [data-title]:before{
+    top: 1px;
+    #{$text-align}: 1px;
+  }
+  [data-title]:after{
+    top: 2px;
+    #{$text-align}: 2px;
+  }
+}
+
+@mixin unselectable() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

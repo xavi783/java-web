@@ -1,0 +1,55 @@
+$authoring-size: 0.81rem !default
+$std-pad: 0.8em !default
+
+article
+	padding: flex-gutter()
+	header
+		@extend %row
+		@extend %header-box-model
+		margin-bottom: 0
+		font-family: $font-family-second
+		font-style: italic
+		h1, h2
+			@extend .h3
+			display: inline-block
+			font-weight: bold
+	.content
+		width: 100%
+		text-align: justify
+		p
+			padding-bottom:  $std-pad 
+			&:last-child
+				padding-bottom:  0
+		img
+			display: block
+			margin: 0 auto
+			padding: $std-pad 0
+			width: auto
+			max-width: 33%
+			text-align: center
+	.authoring
+		padding-top: nth($header-sizes,3) - $authoring-size
+.authoring
+	position: relative
+	float: right
+	display: inline-block	
+	font-family: $font-family
+	font-size: $authoring-size
+	font-color: $font-color			
+	.author
+		display: inline-block
+	[rel="author"],
+	[rel="author"]:link,
+	[rel="author"]:active,
+	[rel="author"]:focus,
+	[rel="author"]:hover,
+	[rel="author"]:visited
+		color: $font-color
+		font-weight: bold
+	.author:after
+		display: inline-block
+		content: "-"
+		padding-right: 1em
+		padding-left: 1em
+	time
+		display: inline-block

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="..\..\main\webapp\WEB-INF\views\resources\jui\jui.min.css" />
+	<link rel="stylesheet" href="..\..\main\webapp\WEB-INF\views\resources\pui\pui-1.0.css"></link>
+	<link rel="stylesheet" href="..\..\main\webapp\WEB-INF\views\resources\uk\uk.css"></link>
+	<script data-main="..\..\main\webapp\WEB-INF\views\resources\uk\main" src="..\..\main\webapp\WEB-INF\views\resources\uk\require.js"></script>
+</head>
+<body>
+
+	<form action="" class="col-4">
+		<div class="field-container">
+			<input id="author" type="text" class="username"></input>
+			<label for="text" th:utext="${lang.equals('en')?'Author':'Autor'}">Author</label>
+		</div>
+		<div class="field-container">
+			<input id="title" type="text" class=""></input>
+			<label for="text" th:utext="${lang.equals('en')?'Title':'Titulo'}">Title</label>
+		</div>
+		<div class="field-container">
+			<input id="username" type="text" class=""></input>
+			<label for="text" th:utext="${lang.equals('en')?'Contains...':'Contiene...'}">Contains...</label>
+		</div>
+		<div class="row">
+			<button class="col-4 last button-pill-glass" th:utext="${lang.equals('en')?'Send':'Enviar'}">Send</button>
+		</div>
+	</form>
+
+	<div id="lista" class="col-10 topbar"></div>
+
+	
+</body>
+</html>

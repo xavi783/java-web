@@ -1,0 +1,75 @@
+
+$scroll-width: 1em !default
+$track-width: 100% !default
+$track-pad: 0 !default
+
+$track-color: lighten($green3,30%) !default
+$thumb-color: $green1 !default
+
+$thumb-size: 1.25em 0.31em !default
+$thumb-cursor: pointer !default
+
+$scroll-radius: 0.25em !default
+
+@mixin scrollbar($direction: y, $colors: $track-color $thumb-color, $scroll-width: $scroll-width, $track-width: $track-width, $track-pad: $track-pad, $thumb-size: $thumb-size, $radius: $scroll-radius)
+	clear: both
+	$dim1: width !default
+	$dim2: height !default
+	@if $direction == x
+		$dim1: "height"
+		$dim2: "width"
+	@else if $direction == y
+		$dim1: "width"
+		$dim2: "height"
+	.viewport 
+		@extend .left
+		position: relative
+		overflow: hidden
+	.overview 
+		position: absolute
+		left: 0
+		top: 0
+		list-style: none
+	.scrollbar
+		@extend .right
+		position: relative
+		#{$dim1}: $scroll-width
+		#{$dim2}: 100%
+	.track 
+		position: relative
+		padding: $track-pad
+		#{$dim1}: $track-width
+		#{$dim2}: 100%
+		background-color: nth($colors,1)
+		border-radius: $radius
+	.thumb 
+		position: absolute
+		top: 0
+		#{$dim1}: $track-width
+		#{$dim2}: nth($thumb-size,1)
+		overflow: hidden
+		cursor: $thumb-cursor
+		background-color: nth($colors,2)
+		border-radius: $radius
+	.thumb .end 
+		overflow: hidden
+		#{$dim1}: $track-width
+		#{$dim2}: nth($thumb-size,2)
+		background-color: nth($colors,2)
+	.disable
+		display: none
+	.right
+		float: right
+	.left
+		float: left
+
+.scroll-y
+	@include scrollbar($direction: y)
+.scroll-x
+	@include scrollbar($direction: x)
+.noSelect 
+	user-select: none
+	-o-user-select: none
+	-moz-user-select: none
+	-khtml-user-select: none
+	-webkit-user-select: none

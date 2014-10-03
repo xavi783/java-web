@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="title=${template.get('title')}"
+      th:charset="UTF-8"
+      lang="en">
+<head th:replace="html/includes/header :: headerFragment">
+    <meta charset="UTF-8" th:charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link  href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link  href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link  href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script src="../../resources/cke/ckeditor.js"></script>
+</head>
+<body class="body-front" id="blog-front" th:inline="text">
+
+	<div th:replace="html/includes/header :: .header-main" class="header-main" style="height: 140.5px;"></div>
+
+	<main class="main">
+		<aside class="row">
+			<aside class="off-1 col-4">
+				<div class="panel box1 shadow-box row">
+					<a href="../shop/home.html" th:href="@{${template.get('links.shop')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[0]')}">
+							Blog
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.home')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[1]')}">
+							Home
+						</button>
+					</a>
+					<a href="../home.html" th:href="@{${template.get('links.portfolio')}}">
+						<button class="col-3 box2 button-pill-glass" th:utext="${template.get('buttons[2]')}">
+							Portfolio
+						</button>
+					</a>
+				</div>
+			</aside>
+			<div class="col-7 blog-banner"></div>
+		</aside>
+
+		<main id="search-content" class="off-1 col-8">
+			<div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+			<div class="viewport left">
+				<div class="overview">
+					<div th:if="${!prods.isEmpty()}">
+						<div th:each="prod : ${prods}">
+							<div th:include="html/includes/inserts :: idArticle (${prod})">...</div>
+		      			</div>
+	      			</div>
+				</div>
+			</div>
+		</main>
+
+		<aside class="col-2" style="width: 20% !important">		
+
+			<aside id="cart-controller" class="cart-controller">
+				<div class="flex-row">
+					<!-- <span class="button-pill-glass checkout cart-empty-icon"> - CHECKOUT</span> -->
+					<form action="" method="POST">
+					  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+					    data-key="pk_test_LSfws1uyFEXFAh9HgaaMYF04"
+					    data-amount="3700"
+					    data-name="CHECKOUT"
+					    data-description="My Book"
+					    data-image="/128x128.png">
+					  </script>
+					</form>
+					<span class="button-pill-glass remove x-icon"></span>		
+				</div>
+				<div id="cart" class="cart">
+					<div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+					<div class="viewport left">
+						<div class="overview">
+							<table id="cart-body" class="flex-col"></table>
+						</div>
+					</div>
+				</div>
+			</aside>
+
+			<nav id="shop-tree" class="row tree" style="width: 100% !important"></nav>
+				
+		</aside>
+	</main>
+
+	<footer class="footer">
+	    <div class="h6 link-list">
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[0]')}">FAQ</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[1]')}">Contact Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[2]')}">About Us</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[3]')}">Recommended Links</a>
+	        <a href="#" th:href="@{/}" th:utext="${footer.get('footer[4]')}">Our Address</a>
+	    </div>
+	</footer>
+
+	<div th:replace="html/includes/header :: footerFragment">
+	    <script src="../../resources/jui/jui.min.js"></script>
+		<script src="../../resources/pui/pui-1.0.js"></script>
+	    <script src="../../resources/bb/underscore-min.js"></script>
+	    <script src="../../resources/bb/backbone-min.js"></script>
+		<script src="../../resources/uk/uk.js"></script>
+		<script src="../../resources/uk/uk-blog.js"></script>
+		<script src="../../resources/uk/uk-shop.js"></script>
+	</div>
+
+</body>
+</html>

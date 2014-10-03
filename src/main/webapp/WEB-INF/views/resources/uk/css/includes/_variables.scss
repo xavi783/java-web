@@ -1,0 +1,49 @@
+//------------------------------ WEB-PREFIX ------------------------------//
+	$experimental: true;
+//-------------------------------- GRID ----------------------------------//	
+	$grid-columns: 12 !default;
+	$direction: left !default;
+	$opposite: right !default;
+	$dim-grids: 4 !default;
+
+//------------------------------ BOX-MODEL -------------------------------//
+	$global-radius: 3px;
+	$round: 50%;
+	
+//------------------------------ BREAKPOINTS -----------------------------//
+	$mobile: 320px;
+	$tabV: 480px;
+	$tabH: 768px;
+	$netbook: 1024px;
+	$monitor: 1280px;
+	$bigscreen: 1440px;
+
+//------------------------------ COLORS ---------------------------------//
+	$lightgreen: #A8D70B;
+	$darkgreen: #6DB33F;
+	$brown: #1C140D;
+	$lightgrey: #E2E2E2;
+	$darkgrey: #ACACA8;
+	$alert-color: #AA0C00;
+	$bg-color: #FFFBC5;
+	$disabled-opacity: 0.6;
+	$onhover-dark: 0.1;
+
+	$green1: rgb(49,64,4);
+	$green2: rgb(92,133,38);
+	$green3: rgb(148,189,4);
+
+	$icon-front-color: rgb(92,133,38) !default;
+	$icon-hover-color: rgb(49,64,4) !default;
+
+//------------------------------ BODERS --------------------------------//
+	$border00: 1px solid #000;
+	$border01: 1px solid $darkgrey;
+	$border-default: 1px solid !default;
+
+//------------------------------ CURSORS -------------------------------//
+	$cr-crosshair: crosshair;
+	$cr-default: default;
+	$cr-pointer: pointer;
+	$cr-help: help;
+	$cr-text: text;

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:charset="UTF-8"
+      lang="en">
+<head th:fragment="headerFragment">
+    <meta charset="UTF-8" th:charset="UTF-8"></meta>
+    <link href="../../resources/jui/jui.min.css" th:href="@{/jui/jui.min.css}" rel="stylesheet"></link>
+    <link href="../../resources/pui/pui-1.0.css" th:href="@{/pui/pui-1.0.css}" rel="stylesheet"></link>
+    <link href="../../resources/uk/uk.css" th:href="@{/uk/uk.css}" rel="stylesheet"></link>
+    <script th:attr="data-main='/web/uk/main'" th:src="@{/uk/require.js}" data-main="..\..\resources\uk\main" src="..\..\resources\uk\require.js"></script>
+</head>
+<body>
+
+<header id="header-main" class="header-main">
+    <div class="lang"><div id="en_flag"></div><div id="es_flag"></div></div>
+    <div th:if="${cookiesAccepted==null || !cookiesAccepted.isAccepted()}" id="notify-cookies"></div>
+	<div class="main">
+		<a href="/" th:href="@{/}" class="off-1 col-2"><div class="centered" id="logo"></div></a>
+		<div class="col-8 content-flow">
+			<form action="" class="col-8 field-container flex-row">
+				<input class="p col-10" type="search" name="searchbox-main"></input>
+				<label class="h6 col-10" for="searchbox-main">Search</label>   
+                <button id="button-search" class="font-icon h6 col-2 last button-search">&#xe009;</button>
+			</form>
+            <form id="advanced-search-form" action="" class="hidden panel shadow-grey-box floating-field col-4">
+                <div class="field-container">
+                    <input name="author" id="search-author" type="text" class="username"></input>
+                    <label for="text" th:utext="${lang.equals('en')?'Author':'Autor'}">Author</label>
+                </div>
+                <div class="field-container">
+                    <input name="title" id="search-title" type="text" class=""></input>
+                    <label for="text" th:utext="${lang.equals('en')?'Title':'Titulo'}">Title</label>
+                </div>
+                <div class="field-container">
+                    <input name="contains" id="search-contains" type="text" class=""></input>
+                    <label for="text" th:utext="${lang.equals('en')?'Contains...':'Contiene...'}">Contains...</label>
+                </div>
+                <div class="row">
+                    <button class="col-4 last button-pill-glass" th:utext="${lang.equals('en')?'Send':'Enviar'}">Send</button>
+                </div>
+            </form>
+			<div class="col-4">
+                <div sec:authorize="isAnonymous()">
+                    <button id="show-signin-form"  class="col-10 button-pill-glass">Sign In</button>
+                    <button id="show-login-form" class="col-10 button-pill-glass">Login</button>
+                </div>
+				<div id="user-profile" class="panel shadow-grey-box" sec:authorize="isAuthenticated()">
+					<a href="/profile" th:href="@{/profile}" class="off-1 col-11 p profile user-icon" sec:authentication="name"></a>
+					<a href="/logout" th:href="@{/logout}" class="off-1 col-11 p logout-btn logout-icon">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div sec:authorize="isAnonymous()">
+    	<div id="login-form" class="hidden col-4 user-form">
+            <form action="/login" th:action="@{/login}" id="login" method="post">
+                <div class="field-container">
+                    <input required="required" name="username" type="text" class="username"></input>
+                    <label for="text">username</label>
+                </div>
+                <div class="field-container">
+                    <input required="required" name="password" type="password"></input>
+                    <label for="password">password</label>
+                </div>
+                <div class="error-hook"></div>
+                <div>
+                    <div id="login-btn" class="row last button-pill-glass user-btn">Log in</div>
+                </div>
+            </form>
+            <form action="/connect/twitter" class="twitter-icon user-btns"></form>
+            <form action="/connect/facebook" class="facebook-icon user-btns"></form>
+            <form action="/connect/google" class="google-icon user-btns"></form>
+        </div>
+        <div id="signin-form" class="hidden col-4 user-form">
+            <form action="/signin" th:action="@{/signin}" id="signin" method="post">
+                <div class="field-container">
+                    <input required="required" name="username" type="text" class="username"></input>
+                    <label for="text">username</label>
+                </div>
+                <div class="field-container">
+                    <input required="required" name="email" type="email"></input>
+                    <label for="email">email</label>
+                </div>
+                <div class="field-container">
+                    <input required="required" name="password" type="password"></input>
+                    <label for="password">password</label>
+                </div>
+                <div class="error-hook"></div>
+                <div>
+                    <div id="signin-btn" class="row last button-pill-glass user-btn">Sign in</div>
+                </div>
+            </form>
+            <form action="/connect/twitter" class="twitter-icon user-btns"></form>
+            <form action="/connect/facebook" class="facebook-icon user-btns"></form>
+            <form action="/connect/google" class="google-icon user-btns"></form>
+        </div>
+    </div>
+</header>
+
+<div th:fragment="footerFragment"></div>
+
+</body>  
+
+</html>

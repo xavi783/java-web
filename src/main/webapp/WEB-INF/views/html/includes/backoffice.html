@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Usukuma</title>
+    <meta charset="UTF-8"></meta>
+    <link href="../../resources/uk/uk.css" rel="stylesheet"></link>
+    <link href="../../resources/jui/jui.min.css" rel="stylesheet"></link>
+    <link href="../../resources/pui/pui-1.0.css" rel="stylesheet"></link>
+    <script data-main="..\..\resources\uk\main" src="..\..\resources\uk\require.js"></script>
+</head>
+<body class="body-front body-editor">
+    <div class="header-main" style="height: 95px;"></div>
+    <div class="col-2 editor-area1"></div>
+
+    <div id="user-areas-container" class="col-2 editor-area1">
+        <a href="./manageUsers.html" th:href="@{/blog/edition/manageUsers}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasRole('ADMIN')">
+                Manage Users
+            </div>
+        </a>
+
+        <a th:if="${template.get('section').equals('blog')}" href="./manageArticles.html" th:href="@{/blog/edition/manageArticles}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasRole('AUTHOR')">
+                Manage Articles
+            </div>
+        </a>
+
+        <a th:if="${template.get('section').equals('blog')}" href="./writeArticles.html" th:href="@{/blog/edition/writeArticles}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasRole('AUTHOR')">
+                Write Articles
+            </div>
+        </a>
+
+        <a th:if="${false}" href="./manageCategories.html" th:href="@{/blog/edition/manageCategories}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasAnyRole('EDITOR','ADMIN')">
+                Manage Categories
+            </div>
+        </a>
+
+        <a th:if="${template.get('section').equals('shop')}" href="./manageProducts.html" th:href="@{/shop/edition/manageProducts}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasRole('VENDOR')">
+                Manage Products
+            </div>            
+        </a>
+
+        <a th:if="${false}" href="./manageCategories.html" th:href="@{/shop/edition/manageCategories}">
+            <div class="rt-row-icon user-areas" sec:authorize="hasAnyRole('MANAGER','ADMIN')">
+                Manage Categories
+            </div>
+        </a>
+    </div>
+
+    <div class="editor-area4"><div id="tree"></div></div>
+
+</body>  
+
+</html>

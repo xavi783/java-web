@@ -1,0 +1,134 @@
+Tareas Admin:
+	Getion Usuarios
+	--------------------------------------------------------------------------------------------------
+		· Vista de usarios:
+		  Lista de usuarios
+		  Lista de roles + landing URL
+		  2 Areas: Usuario y Roles
+		  Area Usuario:
+		    Botones {Nuevo, Borrar, Actualizar}
+		    Campos de Usuario: {Nombre, Email, Roles, Enabled}
+		  Area Roles:
+		  	Botones {Nuevo, Borrar, Actualizar}
+		    Campos de Usuario: {Nombre, Lnading URL}
+
+		1.- Alta nuevo usuario:
+			- Formulario: Insertar datos usuario (Nombre, Email, Roles, Enabled)
+			- Pulsar "Nuevo": mostrar cuadro con confirmacion datos
+
+		2.- Borrar usuarios
+			- Seleccionar usuario/s de una lista
+			- Pulsar "Borrar": mostrar cuadro con confirmacion de usuarios + Insertar Admin Pass
+			- Aceptar: Comprobar si admin pass correcta
+				a.- SI: Eliminar usuario
+				b.- NO: Insertar de nuevo o Cancelar
+
+		3.- Actualizar Usuarios
+			- Seleccionar usuarios (al seleccionar, rellenar formulario de usuarios)
+			- Pulsar "Actualizar": enviar datos usuario (nombre, pass, email, enabled) Con datos previos incluidos (* si es multiple) +
+								   lista de usuarios seleccionados a BlogController
+			- Enviar: mostrar cuadro con confirmacion datos (distintos de *) + Insertar Admin Pass
+			- Aceptar: Comprobar si admin pass correcta
+				a.- SI: modificar usuario/s
+				b.- NO: Insertar de nuevo o Cancelar
+
+		Funcionalidad:
+		-> Comprobar contraseña + ¿Rol de admin?
+
+	Getion Roles
+	--------------------------------------------------------------------------------------------------
+		4.- Crear nuevo rol
+			- Formulario: Insertar datos rol (nombre, landing page)
+			- Pulsar "Nuevo": guardar role
+
+		5.- Borrar Rol
+			- Pulsar "Borrar": mostrar cuadro con confirmacion de role + Insertar Admin Pass
+			- Aceptar:
+				a.- Comprobar si admin pass correcta
+				b.- Comprobar si el role es USER (en este caso cancelar)
+					SI:
+						- Eliminar role
+						- Comprobar usuarios con ese role y borrar su role (Automatico al borrar on cascade?)
+						- Comprobar si existen usuarios sin role (posible si al crear el usuario le 
+						  asignamos por defecto USER y no permitimos borrar user?)
+					NO: Insertar de nuevo pass o Cancelar
+
+		6.- Actualizar rol (landing page)
+			- Seleccionar role (no se admiten selecciones multiples)
+			- Pulsar "Actualizar": mostrar cuadro con confirmacion de usuarios + Insertar Admin Pass
+			- Aceptar: Comprobar si admin pass correcta
+				a.- SI: Cambiar landing page
+				b.- NO: Insertar de nuevo o Cancelar
+
+Tareas Autor
+	Gestión de Artículos (1)
+	--------------------------------------------------------------------------------------------------
+		· Gestion de articulo
+			Lista de artículos con (id, título, autor, fecha de creación, fecha de publicación)
+			Area
+			+ Formulario Metadatos
+			+ botones {Nuevo,Editar,Borrar,Publicar}
+
+		· Edicion de articulo
+			pantalla con CKEditor
+			+ Formulario Metadatos
+			+ botones {guardar,publicar,descartar}
+			+ checboxes {guardado, publicado}
+
+		1.- Escribir artículos: 
+			mostrar listas con artículos del usuario=author + botones: {escribir,cargar,publicar/ocultar,borrar}
+			- Insertar contenido artículo:
+				a.- Pulsar escribir: cargar pantalla de edicion vacia
+			- Guardar Artículo (Solo en pantalla de edicion):
+				a.- Cuando se guarda actualizar checkbox de guardado
+				b.- Enviar contenido a BlogController
+				c.- Guardar contenido en Mongo con campo -> 'publicated': 'false'
+				d.- Guardar contenido en MySQL con campo -> 'publicated': 'false'
+			- Cargar artículo guardado no publicado
+				a.- Escoger articulo y pulsar cargar
+				b.- Cargar pantalla de edicion con editor con contenido del articulo
+			- Publicar artículo:
+				a.- Escoger artículo de lista inicial y mostrar formulario de publicacion
+				b.- Formulario: mostrar metadatos y boton de vista previa + botones Aceptar/Cancelar
+					- Aceptar: 
+						· Guardar contenido en Mongo con campo -> 'publicated': 'true'
+						· Guardar contenido en MySQL con campo -> 'publicated': 'true'
+			- Borrar articulo:
+				- Pulsar Boton: mostrar cuadro con confirmacion con metadata del artículo + Insertar Admin Pass
+				- Aceptar: Comprobar si admin pass correcta
+					a.- SI: Eliminar artículo
+					b.- NO: Insertar de nuevo o Cancelar
+
+		2.- Modificar artículos
+			- Cargar artículo
+				a.- Escoger articulo y pulsar cargar
+				b.- Cargar pantalla de edicion con editor con contenido del articulo
+				c.- Cargar metadatos
+
+	Gestión de Comentarios
+	--------------------------------------------------------------------------------------------------
+		· Lista de comentarios (Autor + preview de texto)
+		· Area con visualización completa del comentario: al seleccionar el comentario, disparar evento
+		  con petición servidor del contenido completo del artículo y cargarlo en el area para esto on success
+		· Botones (Publicar, Borrar)
+
+		1.- Gestionar comentarios
+			· Los comentarios solo deberían guardarse en MongoDb (ver como, lo mejor, en 1 colección/articulo fuera del artículo)
+			- Boton publicar: marcar campo 'publicated' : 'true'
+			- Boton Borrar: borrar comentario de MongoDB
+
+Tareas Editor
+	(+ Tareas de Autor)
+
+	Gestión de Artículos (2)
+	--------------------------------------------------------------------------------------------------
+
+
+	Gestión de Comentarios (2)
+	--------------------------------------------------------------------------------------------------
+
+
+	Gestión de Categorías
+	--------------------------------------------------------------------------------------------------
+
+	

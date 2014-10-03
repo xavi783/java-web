@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:charset="UTF-8"
+      lang="en">
+<head>
+    <meta charset="UTF-8" th:charset="UTF-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link href="../../resources/jui/jui.min.css" th:href="@{/jui/jui.min.css}" rel="stylesheet"></link>
+    <link href="../../resources/pui/pui-1.0.css" th:href="@{/pui/pui-1.0.css}" rel="stylesheet"></link>
+    <script data-main="../../resources/uk/main" src="../../resources/uk/require.js"></script>
+    <link href="../../resources/uk/uk.css" th:href="@{/uk/uk.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+<div class="col-10 centered topbar" th:fragment="navbar(language)">
+    <ul th:if="${language.equals('en')}">
+        <li onclick="location.href='category/all-books/'" class="layer-1 col-6 button-glass">All Books</li>
+        <li onclick="location.href='category/web-development/'" class="layer-1 col-6 button-glass">
+            Web Development
+            <ul>
+                <li onclick="location.href='category/application-development/javascript/'" class="layer-2">JavaScript</li>
+                <li onclick="location.href='category/application-development/html/'" class="layer-2">HTML</li>
+                <li onclick="location.href='category/application-development/css/'" class="layer-2">CSS</li>
+            </ul>
+        </li>
+        <li onclick="location.href='category/big-data-and-bi/'" class="layer-1 col-6 button-glass">Big Data and BI</li>
+        <li onclick="location.href='category/mobile-apps/'" class="layer-1 col-6 button-glass">Mobile Apps</li> 
+        <li onclick="location.href='category/java/'" class="layer-1 col-6 button-glass">
+            Java
+            <ul>
+                <li onclick="location.href='category/java/java/'" class="layer-2">Java</li>
+                <li onclick="location.href='category/java/spring/'" class="layer-2">Spring</li>
+                <li onclick="location.href='category/java/hibernate/'" class="layer-2">Hibernate</li>
+            </ul>
+        </li>
+    </ul>
+    <ul th:if="${language.equals('es')}">
+        <li onclick="location.href='category/all-books/'" class="layer-1 col-6 button-glass">Todos los libros</li>
+        <li onclick="location.href='category/web-development/'" class="layer-1 col-6 button-glass">
+            Desarrollo Web
+            <ul>
+                <li onclick="location.href='category/application-development/javascript/'" class="layer-2">JavaScript</li>
+                <li onclick="location.href='category/application-development/html/'" class="layer-2">HTML</li>
+                <li onclick="location.href='category/application-development/css/'" class="layer-2">CSS</li>
+            </ul>
+        </li>
+        <li onclick="location.href='category/big-data-and-bi/'" class="layer-1 col-6 button-glass">Big Data y BI</li>
+        <li onclick="location.href='category/mobile-apps/'" class="layer-1 col-6 button-glass">Apps Móviles</li> 
+        <li onclick="location.href='category/java/'" class="layer-1 col-6 button-glass">
+            Java
+            <ul>
+                <li onclick="location.href='category/java/java/'" class="layer-2">Java</li>
+                <li onclick="location.href='category/java/spring/'" class="layer-2">Spring</li>
+                <li onclick="location.href='category/java/hibernate/'" class="layer-2">Hibernate</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<br/><br/><br/>
+
+<div th:fragment="idArticle (article)">
+    <div id="article" class="col-12 price-placeholder flex-row">   
+        <div class="col-2 price-image">
+            <a th:href="${article.getSource()}" href="http://www.packtpub.com/openlayers-3-beginners-guide/book">
+                <img class="centered" th:src="${article.getImage()}" src="http://dgdsbygo8mp3h.cloudfront.net/sites/default/files/imagecache/productview_larger/2360OS_mockupcover_bg.jpg" alt="">
+                </img>
+            </a>
+        </div>
+        <div class="col-9 price-panel text-right flex-row flex-expand">
+            <div class="flex-col col-9">
+                <a th:href="${article.get_id()}+'/'" href="">
+                    <div class="flex-expand h4 text-left title-placeholder" th:utext="${article.getTitle()}">
+                        Openlayers 3 Beginners Guide
+                    </div>
+                </a>
+                <div class="flex-row flex-expand">
+                    <div class="flex-col flex-expand">
+                        <p th:if="${article.getOffered()}">
+                            Offer: 
+                            <span style="font-weight: bold;" th:utext="${article.getField('offer').get('discount')}">
+                                -20%
+                            </span>
+                            (<del th:utext="${article.getField('offer').get('original')}">37 €</del>)
+                        </p>
+                        <p>Format: <span class="h5 pdf-icon"></span></p>
+                    </div>
+                    <p>
+                        <span class="h6">Price:</span>
+                        <span class="h5" th:utext="${article.getPrice()}">€30.83</span>
+                    </p>
+                </div>                      
+            </div>    
+            <form action="addItem" class="add-to-cart-form col-3">
+                <input type="text" class="hidden" name="_id" th:value="${article.get_id()}"></input>
+                <input type="number" min="1" max="100" step="1" value="1" name="quant"></input>
+                <button class="add-to-cart-button button-pill-glass">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br/><br/><br/>
+
+<div th:fragment="idArticle (article)">
+    <div id="article" class="col-12 price-placeholder flex-row">   
+        <div class="col-2 price-image">
+            <a th:href="${article.getSource()}" href="http://www.packtpub.com/openlayers-3-beginners-guide/book">
+                <img class="centered" th:src="${article.getImage()}" src="http://dgdsbygo8mp3h.cloudfront.net/sites/default/files/imagecache/productview_larger/2360OS_mockupcover_bg.jpg" alt="">
+                </img>
+            </a>
+        </div>
+        <div class="col-9 price-panel text-right flex-row flex-expand">
+            <div class="flex-col col-9">
+                <a th:href="${article.get_id()}+'/'" href="">
+                    <div class="flex-expand h4 text-left title-placeholder" th:utext="${article.getTitle()}">
+                        Openlayers 3 Beginners Guide
+                    </div>
+                </a>
+                <div class="flex-row flex-expand">
+                    <div class="flex-col flex-expand">
+                        <p th:if="${article.getOffered()}">
+                            Offer: 
+                            <span style="font-weight: bold;" th:utext="${article.getField('offer').get('discount')}">
+                                -20%
+                            </span>
+                            (<del th:utext="${article.getField('offer').get('original')}">37 €</del>)
+                        </p>
+                        <p>Format: <span class="h5 pdf-icon"></span></p>
+                    </div>
+                    <p>
+                        <span class="h6">Price:</span>
+                        <span class="h5" th:utext="${article.getPrice()}">€30.83</span>
+                    </p>
+                </div>                      
+            </div>    
+            <form action="addItem" class="add-to-cart-form col-3">
+                <input type="text" class="hidden" name="_id" th:value="${article.get_id()}"></input>
+                <input type="number" min="1" max="100" step="1" value="1" name="quant"></input>
+                <button class="add-to-cart-button button-pill-glass">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="post (comment)">
+    <article class="post">
+        <header>
+            <div class="stars" data-mark="1.5"></div>
+            <div class="authoring">
+                <address class="author">By 
+                    <a rel="author" th:src="${comment.getAuthorRef()}" th:utext="${comment.getAuthorName()}">John Doe</a>
+                </address> 
+                <time pubdate="pubdate" th:utext="${comment.getPubdate()}">28/12/1986</time>
+            </div>
+        </header>
+        <div class="content" th:utext="${comment.getContent()}">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et tincidunt arcu. Sed pulvinar sodales urna et pharetra. Curabitur tincidunt massa ac nisi laoreet tincidunt. Nam quis suscipit tellus. Maecenas nec dictum erat. Nunc id nunc sapien. Pellentesque accumsan metus non tellus semper, ut commodo est sollicitudin. Praesent at erat laoreet, aliquet ipsum et, scelerisque purus. Sed laoreet sit amet tortor a tempor.</p>
+        </div>
+    </article>
+</div>
+
+<div th:fragment="cart (listOfProducts)">
+    <aside id="cart-controller" class="cart-controller">
+        <div class="flex-row">
+            <span id="checkout-button" class="button-pill-glass checkout cart-empty-icon"> - CHECKOUT</span>
+            <span class="button-pill-glass remove x-icon"></span>       
+        </div>
+        <div id="cart" class="cart">
+            <div class="scrollbar right"><div class="track"><div class="thumb"></div></div></div>
+            <div class="viewport left">
+                <div class="overview">
+                    <table id="cart-body" class="flex-col"></table>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+</body>  
+
+</html>
